@@ -1,6 +1,6 @@
 import './App.css';
 import Navbar from './components/Navbar';
-import Register from './Pages/Register'
+import Login from './Login/Login';
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
@@ -19,7 +19,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <div>
         <Navbar />
-        <Register />
+        <Login />
       </div>
     </ThemeProvider>
   );
