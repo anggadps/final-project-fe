@@ -42,7 +42,7 @@ function Register() {
             </Button>
           </form>
           <p>
-            Have account? <a href="/">Login here</a>{" "}
+            Have account? <a href="/login">Login here</a>{" "}
           </p>
         </div>
       </div>
