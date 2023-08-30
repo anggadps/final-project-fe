@@ -1,6 +1,7 @@
 import React from "react";
 import "./component.css";
 import { Button } from "@mui/material";
+import { Outlet } from "react-router-dom";
 import logo from "./logo.png";
 import { Outlet } from 'react-router-dom';
 
@@ -13,7 +14,7 @@ function Navbar() {
             <img src={logo} alt="Logo" />
           </Button>
         </div>
-        <div>
+        <div className="button-container">
           <Button
             variant="outlined"
             sx={{ ml: 4, width: 175, py: 1, px: 6 }}

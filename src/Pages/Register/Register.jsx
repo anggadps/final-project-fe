@@ -1,19 +1,7 @@
 import React from "react";
 import "./register.css";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Input from "../../components/Input";
 import { Button } from "@mui/material";
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#FABC1D",
-    },
-    secondary: {
-      main: "#5B4947",
-    },
-  },
-});
 
 function Register() {
   return (
@@ -46,7 +34,7 @@ function Register() {
           </p>
         </div>
       </div>
-    </ThemeProvider>
+    </div>
   );
 }
 

@@ -3,11 +3,15 @@ import {Routes, Route} from "react-router-dom"
 import Navbar from "./components/Navbar/Navbar";
 import Login from "./Pages/Login/Login";
 import Register from "./Pages/Register/Register";
+import Reset from "./Pages/Reset/Reset";
 import LandingPage from "./Pages/LandingPage/LandingPage";
 import CreatePassword from "./Pages/CreatePassword/CreatePassword";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
+  typography: {
+    fontFamily: "montserrat",
+  },
   palette: {
     primary: {
       main: "#FABC1D",
@@ -23,10 +27,10 @@ function App() {
     <ThemeProvider theme={theme}>
       <Routes>
         <Route path="/" element={<Navbar />}>
-          <Route index element={<LandingPage />}></Route>
-          <Route path="/register" element={<Register />}></Route>
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="/createpassword" element={<CreatePassword />}></Route>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/reset" element={<Reset />} />
         </Route>
       </Routes>
     </ThemeProvider>
