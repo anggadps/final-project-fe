@@ -62,6 +62,7 @@ function Login() {
           Dont have account? <a href="/register">Sign Up here</a>{" "}
         </p>
       </div>
+    </div>
   );
 }
 
