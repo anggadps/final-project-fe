@@ -29,7 +29,7 @@
 
 form {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: flex-start;
   padding-bottom: 60px;
   width: 616px;
@@ -38,6 +38,7 @@ form {
 form h1 {
   color: var(--primary, #5b4947);
   font-family: Montserrat;
+  margin-bottom: 14px;
   font-size: 24px;
   font-style: normal;
   font-weight: 500;
@@ -54,16 +55,62 @@ form p {
 }
 
 form Button {
-  align-self: end;
-  /* sx={{py: 1, px: 6}} */
   padding: 10px 60px;
+  width: 140px;
 }
 
 .inputDiv {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-top: 20px;
+  margin-top: 60px;
+  margin-bottom: 40px;
   gap: 10px;
   width: 100%;
+}
+
+.buttonDiv {
+  display: flex;
+  gap: 24px;
+  align-self: end;
+}
+
+/* Add a media query for smaller screens */
+@media (max-width: 768px) {
+  .formDiv {
+    margin-top: 30px;
+    padding: 0 20px;
+  }
+
+  form {
+    width: 100%;
+    padding-bottom: 30px;
+  }
+
+  form h1 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  form p {
+    font-size: 14px;
+  }
+
+  form Button {
+    padding: 8px 20px;
+    width: 100%; /* Make the buttons full width on smaller screens */
+    margin-top: 10px; /* Add space between buttons */
+  }
+
+  .inputDiv {
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+
+  .buttonDiv {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-self: end;
+  }
 }
