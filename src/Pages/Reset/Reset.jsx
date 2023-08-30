@@ -34,10 +34,10 @@ function Reset() {
             />
           </div>
           <div className="buttonDiv">
-            <Button variant="outlined" color="secondary" type="reset">
+            <Button href="/login" variant="outlined" color="secondary" type="reset">
               Cancel
             </Button>
-            <Button variant="contained" type="submit">
+            <Button href="/createpassword" variant="contained" type="submit">
               Confirm
             </Button>
           </div>

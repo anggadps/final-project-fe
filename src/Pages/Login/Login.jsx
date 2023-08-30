@@ -1,8 +1,20 @@
 import React from "react";
 import "./login.css";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Input from "../../components/Input";
 import { Button } from "@mui/material";
 import { useState } from "react";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#FABC1D",
+    },
+    secondary: {
+      main: "#5B4947",
+    },
+  },
+});
 
 function Login() {
   const [data, setData] = useState({
@@ -50,7 +62,7 @@ function Login() {
           Dont have account? <a href="/register">Sign Up here</a>{" "}
         </p>
       </div>
-    </div>
+    </ThemeProvider>
   );
 }
 
