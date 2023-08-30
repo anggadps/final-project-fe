@@ -1,10 +1,11 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import {Routes, Route} from "react-router-dom"
 import Navbar from "./components/Navbar/Navbar";
 import Login from "./Pages/Login/Login";
 import Register from "./Pages/Register/Register";
 import Reset from "./Pages/Reset/Reset";
 import LandingPage from "./Pages/LandingPage/LandingPage";
+import CreatePassword from "./Pages/CreatePassword/CreatePassword";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 const theme = createTheme({

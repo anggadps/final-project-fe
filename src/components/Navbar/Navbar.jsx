@@ -3,12 +3,13 @@ import "./component.css";
 import { Button } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import logo from "./logo.png";
+import { Outlet } from 'react-router-dom';
 
 function Navbar() {
   return (
     <div>
       <nav>
-        <div className="logo-container">
+        <div>
           <Button href="/">
             <img src={logo} alt="Logo" />
           </Button>
@@ -33,6 +34,7 @@ function Navbar() {
       </nav>
       <Outlet />
     </div>
+
   );
 }
 
