@@ -25,11 +25,25 @@ function CreatePassword() {
             <p></p>
             <div className="inputDiv">
               <Input labelInput="Email" inputName="email" inputType="email" />
-              <Input labelInput="Password" inputName="password" inputType="password" />
+              <Input
+                labelInput="Password"
+                inputName="password"
+                inputType="password"
+              />
             </div>
-            <div className="buttonDiv"><Button variant="outlined" type="submit" color="secondary" sx={{ py: 1, px: 6 }}>Submit</Button>
-            <Button variant="contained" type="submit" sx={{ py: 1, px: 6 }}>Login</Button></div>
-            
+            <div className="buttonDiv">
+              <Button
+                variant="outlined"
+                type="submit"
+                color="secondary"
+                sx={{ py: 1, px: 6 }}
+              >
+                Submit
+              </Button>
+              <Button variant="contained" type="submit" sx={{ py: 1, px: 6 }}>
+                Login
+              </Button>
+            </div>
           </form>
         </div>
       </div>
