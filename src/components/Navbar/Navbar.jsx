@@ -3,7 +3,6 @@ import "./component.css";
 import { Button } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import logo from "./logo.png";
-import { Outlet } from 'react-router-dom';
 
 function Navbar() {
   return (
@@ -34,7 +33,6 @@ function Navbar() {
       </nav>
       <Outlet />
     </div>
-
   );
 }
 
