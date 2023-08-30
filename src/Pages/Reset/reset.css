@@ -16,7 +16,6 @@
 }
 
 .formDiv a {
-  color: blue;
   font-family: Montserrat;
   font-size: 16px;
   font-style: normal;
@@ -74,6 +73,7 @@ form Button {
   gap: 24px;
   align-self: end;
 }
+
 
 /* Add a media query for smaller screens */
 @media (max-width: 768px) {
