@@ -1,0 +1,140 @@
+.footer {
+    background: var(--Primary, #5b4947);
+    padding: 24px 95px;
+    text-align: justify;
+    font-family: Poppins, sans-serif;
+    margin: 0px;
+  }
+  
+  .footer-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  
+  .about-us {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 350px;
+    height: 137px;
+  }
+  
+  .about-us h1 {
+    color: var(--Secondary, #fabc1d);
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin: 0;
+  }
+  
+  .about-us p {
+    color: #fff;
+    text-align: justify;
+    font-family: Poppins;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0;
+  }
+  
+  .product {
+    width: 228px;
+    height: 146px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .product h1 {
+    color: var(--Secondary, #fabc1d);
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin: 0;
+  }
+  
+  .product-point {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  
+  .product-point ul {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .product-point li {
+    color: #fff;
+    font-family: Poppins;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0;
+  }
+  
+  .address {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 352px;
+    height: 172px;
+  }
+  
+  .address h1 {
+    color: var(--Secondary, #fabc1d);
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-top: 8px;
+  }
+  
+  .address p {
+    color: #fff;
+    font-family: Poppins;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0;
+  }
+  
+  .address-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .link {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  @media (max-width: 768px) {
+    /* Adjust padding and layout for smaller screens */
+    .footer {
+      padding: 24px 15px;
+    }
+  
+    .footer-content {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .about-us,
+    .product,
+    .address {
+      width: 100%;
+      max-width: 350px;
+    }
+  }
+  

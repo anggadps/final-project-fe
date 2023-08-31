@@ -46,7 +46,7 @@ function CreatePassword() {
               color="secondary"
               sx={{ py: 1, px: 6 }}
             >
-              Submit
+              Cancel
             </Button>
             <Button variant="contained" type="submit" sx={{ py: 1, px: 6 }}>
               Login
