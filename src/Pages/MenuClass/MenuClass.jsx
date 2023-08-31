@@ -102,11 +102,10 @@ const MenuClass = () => {
                 <div>
                     <h1>Another menu in this class</h1>
                 </div>
-                <div className="card">
                     <Grid container spacing={2}>
                         {menuItems.map((item) => {
                             return (
-                                <Grid item xs={12} sm={6} md={4} key={item.id}>
+                                <Grid item xs={13} sm={6} md={4} key={item.id}>
                                     <Card
                                         category={item.category}
                                         name={item.name}
@@ -117,7 +116,6 @@ const MenuClass = () => {
                             )
                         })}
                     </Grid>
-                </div>
             </section>
         </div>
 
