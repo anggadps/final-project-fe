@@ -3,6 +3,7 @@ import "./landingpage.css";
 import Card from "../../components/MenuCard";
 import CategoryCard from "../../components/CategoryCard";
 import { Grid } from "@mui/material";
+// import Footer from "../../components/Footer/Footer";
 import tomyum from "./images/tomyum.png";
 import stroberi from "./images/stroberi.png";
 import cookies from "./images/cookies.png";
@@ -130,7 +131,7 @@ function LandingPage() {
         <div className="class-card">
           <Grid container spacing={3}>
             {menuItems.map((item) => (
-              <Grid item xs={4} key={item.name}>
+              <Grid item xs={12} sm={6} md={4} key={item.name}>
                 <Card
                   category={item.category}
                   name={item.name}
@@ -162,9 +163,9 @@ function LandingPage() {
           <h1>More food type as you can choose</h1>
         </div>
         <div className="category-card">
-          <Grid container spacing={4}>
+          <Grid container spacing={2}>
             {categoryItems.map((item) => (
-              <Grid item xs={3} key={item.name}>
+              <Grid item xs={6} sm={4} md={3} key={item.name}>
                 <CategoryCard name={item.name} image={item.image} />
               </Grid>
             ))}
