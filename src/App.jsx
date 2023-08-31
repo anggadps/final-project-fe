@@ -7,6 +7,7 @@ import Reset from "./Pages/Reset/Reset";
 import LandingPage from "./Pages/LandingPage/LandingPage";
 import CreatePassword from "./Pages/CreatePassword/CreatePassword";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import Footer from "./components/Footer/Footer";
 
 const theme = createTheme({
   typography: {
@@ -25,15 +26,15 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
+      <Navbar />
       <Routes>
-        <Route path="/" element={<Navbar />}>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/createpassword" element={<CreatePassword />} />
-          <Route path="/reset" element={<Reset />} />
-        </Route>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/createpassword" element={<CreatePassword />} />
+        <Route path="/reset" element={<Reset />} />
       </Routes>
+      <Footer />
     </ThemeProvider>
   );
 }
