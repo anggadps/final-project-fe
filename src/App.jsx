@@ -9,6 +9,7 @@ import LandingPage from "./Pages/LandingPage/LandingPage";
 import CreatePassword from "./Pages/CreatePassword/CreatePassword";
 import MenuClass from "./Pages/MenuClass/MenuClass";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import Footer from "./components/Footer/Footer";
 
 const theme = createTheme({
   typography: {
