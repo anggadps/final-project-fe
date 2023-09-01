@@ -1,10 +1,17 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import "./register.css";
 import Input from "../../components/Input";
 import { Button } from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
+import { useNavigate } from "react-router-dom";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 function Register() {
+  const navigate = useNavigate();
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -12,20 +19,44 @@ function Register() {
     confirmPassword: "",
   });
 
-  const [passwordsMatch, setPasswordsMatch] = useState(true);
+  const [alert, setAlert] = useState({
+    open: false,
+    message: "Password and Confirm Password do not match.",
+  });
+  const { open, message } = alert;
 
   const inputOnchange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
-  // on submit form console.log(data)
   const onSubmit = (e) => {
     if (data.password !== data.confirmPassword) {
-      setPasswordsMatch(false);
-    } else {
-      setPasswordsMatch(true);
+      setAlert({
+        open: true,
+        message: "Password and Confirm Password do not match.",
+      });
       e.preventDefault();
-      console.log(data);
+    } else if (data.password.length < 8) {
+      setAlert({
+        open: true,
+        message: "Password must be at least 8 characters.",
+      });
+      e.preventDefault();
+    } else if (data.name.length < 3) {
+      setAlert({
+        open: true,
+        message: "Name must be at least 3 characters.",
+      });
+      e.preventDefault();
+    } else if (data.email.includes("@") === false) {
+      setAlert({
+        open: true,
+        message: "Email must be valid.",
+      });
+      e.preventDefault();
+    } else {
+      setAlert({ open: false, message: "" });
+      navigate("/login");
     }
   };
 
@@ -46,7 +77,6 @@ function Register() {
               labelInput="Email"
               inputName="email"
               inputOnchange={inputOnchange}
-              inputType="email"
             />
             <Input
               labelInput="Password"
@@ -61,14 +91,19 @@ function Register() {
               inputType="password"
             />
           </div>
-          {!passwordsMatch && (
-            <div className="custom-alert">
-              <p>Password and Confirm Password do not match.</p>
-            </div>
-          )}
+
           <Button variant="contained" type="submit">
             Sign Up
           </Button>
+          <Snackbar
+            open={open}
+            autoHideDuration={5000}
+            onClose={() => setAlert({ open: false, message: "" })}
+          >
+            <Alert severity="error" sx={{ width: "100%" }}>
+              {message}
+            </Alert>
+          </Snackbar>
         </form>
         <p>
           Have account? <a href="/login">Login here</a>{" "}
