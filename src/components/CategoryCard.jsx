@@ -4,10 +4,10 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 
-export default function MediaCard({ name, image }) {
+export default function MediaCard({ name, image, id }) {
   return (
     <Card sx={{ maxWidth: 200 }}>
-      <CardActionArea href="/menuclass">
+      <CardActionArea href={`/${id}`}>
         <CardMedia sx={{ height: 140 }} image={image} title={name} />
         <Typography
           gutterBottom
