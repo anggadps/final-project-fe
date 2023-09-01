@@ -7,8 +7,12 @@ import { CardActionArea } from "@mui/material";
 export default function MediaCard({ name, image, id }) {
   return (
     <Card sx={{ maxWidth: 200 }}>
-      <CardActionArea href={`/${id}`}>
-        <CardMedia sx={{ height: 140 }} image={image} title={name} />
+      <CardActionArea href={`/menuclass/${id}`}>
+        <CardMedia
+          sx={{ height: 140 }}
+          image="http://via.placeholder.com/600"
+          title={name}
+        />
         <Typography
           gutterBottom
           variant="h5"

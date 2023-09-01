@@ -4,97 +4,8 @@ import Card from "../../components/MenuCard";
 import CategoryCard from "../../components/CategoryCard";
 import { Grid } from "@mui/material";
 import axios from "axios";
-// import tomyum from "./images/tomyum.png";
-// import stroberi from "./images/stroberi.png";
-// import cookies from "./images/cookies.png";
-// import greenck from "./images/greenck.png";
-// import soto from "./images/soto.png";
-// import spageti from "./images/spageti.png";
-// import asian from "./images/asian.png";
-// import colddrink from "./images/colddrink.png";
-// import cookies2 from "./images/cookiescc.png";
-// import dessert from "./images/dessert.png";
-// import western from "./images/western.png";
-// import eastern from "./images/eastern.png";
-// import hotdrink from "./images/hotdrink.png";
-// import junkfood from "./images/junkfood.png";
 
 function LandingPage() {
-  // const menuItems = [
-  //   {
-  //     category: "Asian",
-  //     name: "Tom Yum Thailand",
-  //     price: "IDR 450.000",
-  //     image: tomyum,
-  //   },
-  //   {
-  //     category: "Cold Drink",
-  //     name: "Strawberry Float",
-  //     price: "IDR 150.000",
-  //     image: stroberi,
-  //   },
-  //   {
-  //     category: "Cookies",
-  //     name: "Chocholate Cookies",
-  //     price: "IDR 200.000",
-  //     image: cookies,
-  //   },
-  //   {
-  //     category: "Dessert",
-  //     name: "Green Tea Cheesecake",
-  //     price: "IDR 400.000",
-  //     image: greenck,
-  //   },
-  //   {
-  //     category: "Asian",
-  //     name: "Soto Banjar Limau Kult",
-  //     price: "IDR 150.000",
-  //     image: soto,
-  //   },
-  //   {
-  //     category: "Western",
-  //     name: "Italian Spaghetti Bolognare",
-  //     price: "IDR 450.000",
-  //     image: spageti,
-  //   },
-  // ];
-
-  // const categoryItems = [
-  //   {
-  //     name: "Asian",
-  //     image: asian,
-  //   },
-  //   {
-  //     name: "Cold Drink",
-  //     image: colddrink,
-  //   },
-  //   {
-  //     name: "Cookies",
-  //     image: cookies2,
-  //   },
-  //   {
-  //     name: "Dessert",
-  //     image: dessert,
-  //   },
-
-  //   {
-  //     name: "Eastern",
-  //     image: eastern,
-  //   },
-  //   {
-  //     name: "Hot Drink",
-  //     image: hotdrink,
-  //   },
-  //   {
-  //     name: "Junkfood",
-  //     image: junkfood,
-  //   },
-  //   {
-  //     name: "Western",
-  //     image: western,
-  //   },
-  // ];
-
   const [menuItems, setMenuItems] = useState([]);
   const [categoryItems, setCategoryItems] = useState([]);
 
@@ -111,8 +22,6 @@ function LandingPage() {
         setCategoryItems(response.data);
       });
   }, []);
-
-  console.log(categoryItems);
 
   return (
     <div>
@@ -150,7 +59,7 @@ function LandingPage() {
         <div className="class-card">
           <Grid container spacing={3}>
             {menuItems.map((item) => (
-              <Grid item xs={12} sm={6} md={4} key={item.name}>
+              <Grid item xs={12} sm={6} md={4} key={item.id}>
                 <Card
                   category={item.category}
                   name={item.name}
@@ -184,7 +93,7 @@ function LandingPage() {
         <div className="category-card">
           <Grid container spacing={2}>
             {categoryItems.map((item) => (
-              <Grid item xs={6} sm={4} md={3} key={item.name}>
+              <Grid item xs={6} sm={4} md={3} key={item.id}>
                 <CategoryCard
                   name={item.type_name}
                   image={item.image}
