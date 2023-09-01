@@ -34,8 +34,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/createpassword" element={<CreatePassword />} />
         <Route path="/reset" element={<Reset />} />
-        {/* <Route path="/menuclass" element={<MenuClass />} /> */}
-        <Route path=":id" element={<MenuClass />} />
+        <Route path="/menuclass/:id" element={<MenuClass />} />
       </Routes>
       <Footer />
     </ThemeProvider>
