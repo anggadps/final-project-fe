@@ -17,7 +17,19 @@ function Login() {
   // on submit form console.log(data)
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(data);
+
+    if (data.email === "" || data.password === "") {
+      alert("Please fill all the form");
+    } else if (
+      data.email.includes("@") === false ||
+      data.email.includes(".") === false
+    ) {
+      alert("Please enter a valid email address");
+    } else if (data.password.length <= 8) {
+      alert("Password must be at least 8 characters");
+    } else {
+      console.log(data);
+    }
   };
   return (
     <div>
@@ -29,7 +41,7 @@ function Login() {
             <Input
               labelInput="Email"
               inputName="email"
-              inputType="email"
+              // inputType="email"
               inputOnchange={inputOnchange}
             />
             <Input
