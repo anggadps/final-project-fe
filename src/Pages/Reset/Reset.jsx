@@ -3,8 +3,25 @@ import "./reset.css";
 import Input from "../../components/Input";
 import { Button } from "@mui/material";
 import { useState } from "react";
+import MuiAlert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
+import { useNavigate } from "react-router-dom";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 function Reset() {
+  const navigate = useNavigate();
+
+
+  const [alert, setAlert] = React.useState({
+    open: false,
+  });
+  const { open } = alert;
+
+
+
   const [data, setData] = useState({
     email: "",
   });
@@ -16,7 +33,11 @@ function Reset() {
   // on submit form console.log(data)
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(data);
+    if (data.email.includes("@")) {
+      navigate("/createpassword")
+    } else {
+      setAlert({ ...alert, open: true });
+    }
   };
 
   return (
@@ -29,17 +50,24 @@ function Reset() {
             <Input
               labelInput="Email"
               inputName="email"
-              inputType="email"
+              // inputType="email"
               inputOnchange={inputOnchange}
             />
           </div>
           <div className="buttonDiv">
-            <Button href="/login" variant="outlined" color="secondary" type="reset">
+            <Button variant="outlined" color="secondary" type="reset">
               Cancel
             </Button>
-            <Button href="/createpassword" variant="contained" type="submit">
+            <Button variant="contained" type="submit">
               Confirm
             </Button>
+            <Snackbar open={open} autoHideDuration={100}>
+              <Alert
+                severity="error"
+                sx={{ width: '100%' }}>
+                You have entered an invalid e-mail address. Please try again.
+              </Alert>
+            </Snackbar>
           </div>
         </form>
       </div>
