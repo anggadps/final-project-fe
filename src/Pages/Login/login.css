@@ -66,3 +66,7 @@ form Button {
     gap: 10px;
     width: 100%;
 }
+
+.alert {
+    border-color: #ff1900;
+}
