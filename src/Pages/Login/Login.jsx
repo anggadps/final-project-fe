@@ -13,11 +13,12 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 function Login() {
   const navigate = useNavigate();
+  
 
   const [alert, setAlert] = React.useState({
     open: false,
   });
-  const { open } = alert;
+  const { open, message } = alert;
 
   const [data, setData] = useState({
     email: "",
@@ -30,11 +31,24 @@ function Login() {
 
   // on submit form console.log(data)
   const onSubmit = (e) => {
-    e.preventDefault();
-    if (data.email.includes("@")) {
-      navigate("/");
+    if (data.email === "" || data.password === "") {
+      setAlert({ open: true, message: "Please fill up the form.",});
+      e.preventDefault();
+    } else if (data.email.includes("@") === false) {
+      setAlert({
+        open: true,
+        message: "Email must be valid.",
+      });
+      e.preventDefault();
+    } else if (data.password.length < 8){
+      setAlert({
+        open: true,
+        message: "Password must be at least 8 characters.",
+      });
+      e.preventDefault();
     } else {
-      setAlert({ ...alert, open: true });
+      setAlert({ open: false, message: "" });
+      navigate("/");
     }
   };
   return (
@@ -63,9 +77,9 @@ function Login() {
           <Button variant="contained" type="submit" sx={{ py: 1, px: 6 }}>
             Login
           </Button>
-          <Snackbar open={open} autoHideDuration={100}>
+          <Snackbar open={open} autoHideDuration={5000} onClose={() => setAlert({ open: false, message: "" })}>
             <Alert severity="error" sx={{ width: "100%" }}>
-              You have entered an invalid e-mail address. Please try again.
+              {message}
             </Alert>
           </Snackbar>
         </form>
