@@ -23,6 +23,9 @@ function LandingPage() {
       });
   }, []);
 
+  console.log(menuItems);
+  console.log(categoryItems);
+
   return (
     <div>
       <section className="hero">

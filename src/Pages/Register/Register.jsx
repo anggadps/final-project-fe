@@ -30,7 +30,20 @@ function Register() {
   };
 
   const onSubmit = (e) => {
-    if (data.password !== data.confirmPassword) {
+    // if the form doesnt fill up
+
+    if (
+      data.name === "" ||
+      data.email === "" ||
+      data.password === "" ||
+      data.confirmPassword === ""
+    ) {
+      setAlert({
+        open: true,
+        message: "Please fill up the form.",
+      });
+      e.preventDefault();
+    } else if (data.password !== data.confirmPassword) {
       setAlert({
         open: true,
         message: "Password and Confirm Password do not match.",
