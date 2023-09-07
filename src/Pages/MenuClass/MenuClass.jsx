@@ -24,12 +24,6 @@ const MenuClass = () => {
       .then((response) => {
         setMenuItems(response.data);
       });
-
-    axios
-      .get("http://52.237.194.35:2022/api/product/GetCarsLimit")
-      .then((response) => {
-        setMenuItems(response.data);
-      });
   }, []);
 
   return (
