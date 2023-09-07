@@ -5,6 +5,7 @@ import { Button } from "@mui/material";
 import { useState } from "react";
 import MuiAlert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
+import Navbar from "../../components/Navbar/Navbar-guest";
 import { useNavigate } from "react-router-dom";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -13,7 +14,6 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 function Login() {
   const navigate = useNavigate();
-  
 
   const [alert, setAlert] = React.useState({
     open: false,
@@ -29,10 +29,9 @@ function Login() {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
-  // on submit form console.log(data)
   const onSubmit = (e) => {
     if (data.email === "" || data.password === "") {
-      setAlert({ open: true, message: "Please fill up the form.",});
+      setAlert({ open: true, message: "Please fill up the form." });
       e.preventDefault();
     } else if (data.email.includes("@") === false) {
       setAlert({
@@ -40,7 +39,7 @@ function Login() {
         message: "Email must be valid.",
       });
       e.preventDefault();
-    } else if (data.password.length < 8){
+    } else if (data.password.length < 8) {
       setAlert({
         open: true,
         message: "Password must be at least 8 characters.",
@@ -53,6 +52,7 @@ function Login() {
   };
   return (
     <div>
+      <Navbar />
       <div className="formDiv">
         <form onSubmit={onSubmit}>
           <h1>Welcome Back! Cheff</h1>
@@ -77,7 +77,11 @@ function Login() {
           <Button variant="contained" type="submit" sx={{ py: 1, px: 6 }}>
             Login
           </Button>
-          <Snackbar open={open} autoHideDuration={5000} onClose={() => setAlert({ open: false, message: "" })}>
+          <Snackbar
+            open={open}
+            autoHideDuration={5000}
+            onClose={() => setAlert({ open: false, message: "" })}
+          >
             <Alert severity="error" sx={{ width: "100%" }}>
               {message}
             </Alert>

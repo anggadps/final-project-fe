@@ -21,8 +21,6 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-
-  /* remove underline */
   text-decoration: none;
 }
 
@@ -54,7 +52,6 @@ form p {
 
 form Button {
   align-self: end;
-  /* sx={{py: 1, px: 6}} */
   padding: 10px 60px;
 }
 

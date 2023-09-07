@@ -5,6 +5,7 @@ import { Button } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../../components/Navbar/Navbar-guest";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -30,8 +31,6 @@ function Register() {
   };
 
   const onSubmit = (e) => {
-    // if the form doesnt fill up
-
     if (
       data.name === "" ||
       data.email === "" ||
@@ -75,6 +74,7 @@ function Register() {
 
   return (
     <div>
+      <Navbar />
       <div className="formDiv">
         <form onSubmit={onSubmit}>
           <h1>Are you ready become a professional cheff?</h1>

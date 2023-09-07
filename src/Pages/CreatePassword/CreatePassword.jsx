@@ -3,10 +3,10 @@ import "./createpassword.css";
 import Input from "../../components/Input";
 import { Button } from "@mui/material";
 import { useState } from "react";
-import MuiAlert from '@mui/material/Alert';
-import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
+import Navbar from "../../components/Navbar/Navbar-guest";
 import { useNavigate } from "react-router-dom";
-
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -32,16 +32,16 @@ function CreatePassword() {
   // on submit form console.log(data)
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(data.password.length)
+    console.log(data.password.length);
     if (data.password.length >= 8) {
-      navigate("/")
+      navigate("/");
     } else {
       setAlert({ ...alert, open: true });
     }
-    
   };
   return (
     <div>
+      <Navbar />
       <div className="formDiv">
         <form action="" onSubmit={onSubmit}>
           <h1>Create Password</h1>
@@ -73,9 +73,7 @@ function CreatePassword() {
               Login
             </Button>
             <Snackbar open={open} autoHideDuration={100}>
-              <Alert
-                severity="error"
-                sx={{ width: '100%' }}>
+              <Alert severity="error" sx={{ width: "100%" }}>
                 Password at least 8 digit.
               </Alert>
             </Snackbar>
