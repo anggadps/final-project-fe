@@ -11,12 +11,19 @@ const MenuClass = () => {
   const { id } = useParams();
   const [menuItems, setMenuItems] = useState([]);
   const [data, setData] = useState([]);
+  const [menuItems, setMenuItems] = useState([]);
 
   useEffect(() => {
     axios
       .get(`http://52.237.194.35:2022/api/product/GetCarByID?IdType=${id}`)
       .then((response) => {
         setData(response.data);
+      });
+
+    axios
+      .get("http://52.237.194.35:2022/api/product/GetCarsLimit")
+      .then((response) => {
+        setMenuItems(response.data);
       });
 
     axios
@@ -31,7 +38,7 @@ const MenuClass = () => {
       <Navbar />
       <section className="menu-class">
         <div className="header-bg">
-          <img src={asian} alt="Header" />
+          <img src={asia} alt="Header" />
         </div>
       </section>
       <section className="description">
