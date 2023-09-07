@@ -1,6 +1,5 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import Login from "./Pages/Login/Login";
 import Register from "./Pages/Register/Register";
@@ -27,13 +26,12 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Navbar />
       <Routes>
-        <Route path="/" element={<LandingPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/createpassword" element={<CreatePassword />} />
         <Route path="/reset" element={<Reset />} />
+        <Route path="/" element={<LandingPage />} />
         <Route path="/menuclass/:id" element={<MenuClass />} />
       </Routes>
       <Footer />

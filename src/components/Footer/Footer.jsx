@@ -1,13 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./index.css";
 import phone from "./images/phone.png";
 import mail from "./images/mail.png";
 import instagram from "./images/instagram.png";
 import tele from "./images/tele.png";
 import youtube from "./images/youtube.png";
-import { Outlet } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 
 function Footer() {
+  const [categoryItems, setCategoryItems] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://52.237.194.35:2022/api/product/GetTypeProduct")
+      .then((response) => {
+        setCategoryItems(response.data);
+      });
+  }, []);
   return (
     <div>
       <footer className="footer">
@@ -25,32 +35,26 @@ function Footer() {
             <h1>Product</h1>
             <div className="product-point">
               <ul>
-                <li>
-                  <p>Asian</p>
-                </li>
-                <li>
-                  <p>Cold Drink</p>
-                </li>
-                <li>
-                  <p>Cookies</p>
-                </li>
-                <li>
-                  <p>Desert</p>
-                </li>
+                {categoryItems.slice(0, 4).map((item) => (
+                  <li key={item.id}>
+                    <p>
+                      <Link reloadDocument to={`/menuclass/${item.id}`}>
+                        {item.type_name}
+                      </Link>
+                    </p>
+                  </li>
+                ))}
               </ul>
               <ul>
-                <li>
-                  <p>Eastern</p>
-                </li>
-                <li>
-                  <p>Hot Drink</p>
-                </li>
-                <li>
-                  <p>Junkfood</p>
-                </li>
-                <li>
-                  <p>Western</p>
-                </li>
+                {categoryItems.slice(4, 8).map((item) => (
+                  <li key={item.id}>
+                    <p>
+                      <Link reloadDocument to={`/menuclass/${item.id}`}>
+                        {item.type_name}
+                      </Link>
+                    </p>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>

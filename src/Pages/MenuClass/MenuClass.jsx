@@ -4,13 +4,13 @@ import "./menuclass.css";
 import { Grid } from "@mui/material";
 import Card from "../../components/MenuCard";
 import axios from "axios";
-import asia from "./images/asian.png"
+import asian from "./images/asian.png";
+import Navbar from "../../components/Navbar/Navbar-user";
 
 const MenuClass = () => {
-
   const { id } = useParams();
-  const [data, setData] = useState([]);
   const [menuItems, setMenuItems] = useState([]);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     axios
@@ -26,13 +26,12 @@ const MenuClass = () => {
       });
   }, []);
 
-  console.log(data);
-
   return (
     <div>
+      <Navbar />
       <section className="menu-class">
         <div className="header-bg">
-          <img src={asia} alt="Header" />
+          <img src={asian} alt="Header" />
         </div>
       </section>
       <section className="description">
