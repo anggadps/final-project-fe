@@ -11,7 +11,6 @@ const MenuClass = () => {
   const { id } = useParams();
   const [menuItems, setMenuItems] = useState([]);
   const [data, setData] = useState([]);
-  const [menuItems, setMenuItems] = useState([]);
 
   useEffect(() => {
     axios
@@ -38,7 +37,7 @@ const MenuClass = () => {
       <Navbar />
       <section className="menu-class">
         <div className="header-bg">
-          <img src={asia} alt="Header" />
+          <img src={asian} alt="Header" />
         </div>
       </section>
       <section className="description">
