@@ -1,9 +1,7 @@
 import React from "react";
 import { TextField } from "@mui/material";
 
-function Input({ labelInput, inputName, inputType, inputOnchange, condition, errorMsg }) {
-
-
+function Input({ labelInput, inputName, inputType, inputOnchange, condition, errorMsg}) {
   return (
     <TextField
       onChange={inputOnchange}
