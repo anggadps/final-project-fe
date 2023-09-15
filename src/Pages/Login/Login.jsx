@@ -7,6 +7,7 @@ import MuiAlert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import Navbar from "../../components/Navbar/Navbar-guest";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -47,7 +48,16 @@ function Login() {
       e.preventDefault();
     } else {
       setAlert({ open: false, message: "" });
-      navigate("/");
+      axios
+        .post("https://localhost:7091/api/User/Login",{
+          password: data.password,
+          email: data.email,
+        })
+        .then((response) => {
+          setAlert({ ...alert, open: true })
+          navigate("/");
+        })
+        .catch(error => console.log(error))
     }
   };
   return (
