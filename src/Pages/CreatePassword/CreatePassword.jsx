@@ -6,7 +6,7 @@ import { useState } from "react";
 import MuiAlert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import Navbar from "../../components/Navbar/Navbar-guest";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -33,8 +33,9 @@ function CreatePassword() {
 
   useEffect(() => {
     const email = searchParams.get("email")
-    console.log("get param email", email)
-    setData({ ...data, ...{email }})
+    if (email) {
+      setData((prevData) => ({ ...prevData, email }));
+    }
   },[searchParams])
 
   const inputOnchange = (e) => {
@@ -54,7 +55,7 @@ function CreatePassword() {
           email: data.email,
         })
         .then((response) => {
-          setAlert({ ...alert, open: true, severity: "success", message: "Success, Please check your email for confirmation." })
+          setAlert({ ...alert, open: true })
         })
         .catch(error => console.log(error))
     } else {
