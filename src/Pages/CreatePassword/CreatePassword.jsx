@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./createpassword.css";
 import Input from "../../components/Input";
 import { Button } from "@mui/material";
@@ -6,7 +6,8 @@ import { useState } from "react";
 import MuiAlert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import Navbar from "../../components/Navbar/Navbar-guest";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import axios from "axios";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -14,6 +15,10 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 function CreatePassword() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+
+ 
 
   const [alert, setAlert] = React.useState({
     open: false,
@@ -23,7 +28,15 @@ function CreatePassword() {
   const [data, setData] = useState({
     password: "",
     confirmPassword: "",
+    email: "",
   });
+
+  useEffect(() => {
+    const email = searchParams.get("email")
+    if (email) {
+      setData((prevData) => ({ ...prevData, email }));
+    }
+  },[searchParams])
 
   const inputOnchange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -32,9 +45,19 @@ function CreatePassword() {
   // on submit form console.log(data)
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(data.password.length);
+    console.log(data)
     if (data.password.length >= 8) {
       navigate("/");
+      axios
+        .post("https://localhost:7091/api/User/ResetPassword",{
+          password: data.password,
+          confirmPassword: data.confirmPassword,
+          email: data.email,
+        })
+        .then((response) => {
+          setAlert({ ...alert, open: true })
+        })
+        .catch(error => console.log(error))
     } else {
       setAlert({ ...alert, open: true });
     }
@@ -70,7 +93,7 @@ function CreatePassword() {
               Cancel
             </Button>
             <Button variant="contained" type="submit" sx={{ py: 1, px: 6 }}>
-              Login
+              Submit
             </Button>
             <Snackbar open={open} autoHideDuration={100}>
               <Alert severity="error" sx={{ width: "100%" }}>

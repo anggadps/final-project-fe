@@ -17,13 +17,15 @@ const MenuClass = () => {
       .get(`http://52.237.194.35:2022/api/product/GetCarByID?IdType=${id}`)
       .then((response) => {
         setData(response.data);
-      });
+      })
+      .catch(error => console.log(error))
 
     axios
       .get("http://52.237.194.35:2022/api/product/GetCarsLimit")
       .then((response) => {
         setMenuItems(response.data);
-      });
+      })
+      .catch(error => console.log(error))
   }, []);
 
   return (

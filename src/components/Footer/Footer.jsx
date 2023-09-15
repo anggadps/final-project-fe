@@ -16,7 +16,8 @@ function Footer() {
       .get("http://52.237.194.35:2022/api/product/GetTypeProduct")
       .then((response) => {
         setCategoryItems(response.data);
-      });
+      })
+      .catch(error => console.log(error));
   }, []);
   return (
     <div>
