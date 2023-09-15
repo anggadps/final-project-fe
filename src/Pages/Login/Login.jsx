@@ -49,15 +49,15 @@ function Login() {
     } else {
       setAlert({ open: false, message: "" });
       axios
-        .post("https://localhost:7091/api/User/Login",{
+        .post("https://localhost:7091/api/User/Login", {
           password: data.password,
           email: data.email,
         })
         .then((response) => {
           setAlert({ ...alert, open: true })
-          navigate("/");
         })
-        .catch(error => console.log(error))
+        .catch(error => console.log(error));
+      navigate("/");
     }
   };
   return (

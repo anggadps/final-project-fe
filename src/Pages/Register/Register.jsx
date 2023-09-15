@@ -70,17 +70,17 @@ function Register() {
     } else {
       setAlert({ open: false, message: "" });
       axios
-        .post("https://localhost:7091/api/User/CreateUser",{
+        .post("https://localhost:7091/api/User/CreateUser", {
           name: data.name,
           password: data.password,
           email: data.email,
         })
         .then((response) => {
           setAlert({ ...alert, open: true })
-          navigate("/login");
         })
-        .catch(error => console.log(error))
-      
+        .catch(error => console.log(error));
+      navigate("/login");
+
     }
   };
 
