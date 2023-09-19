@@ -14,18 +14,18 @@ const MenuClass = () => {
 
   useEffect(() => {
     axios
-      .get(`http://52.237.194.35:2022/api/product/GetCarByID?IdType=${id}`)
+      .get(process.env.REACT_APP_API_URL + `/Category/GetById?id=${id}`)
       .then((response) => {
         setData(response.data);
       })
-      .catch(error => console.log(error))
+      .catch((error) => console.log(error));
 
     axios
-      .get("http://52.237.194.35:2022/api/product/GetCarsLimit")
+      .get(process.env.REACT_APP_API_URL + `/Course`)
       .then((response) => {
         setMenuItems(response.data);
       })
-      .catch(error => console.log(error))
+      .catch((error) => console.log(error));
   }, []);
 
   return (
@@ -37,7 +37,7 @@ const MenuClass = () => {
         </div>
       </section>
       <section className="description">
-        <h1>{data.type_name}</h1>
+        <h1>{data.name}</h1>
         <p>{data.description}</p>
       </section>
 

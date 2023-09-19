@@ -17,9 +17,6 @@ function CreatePassword() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
-
- 
-
   const [alert, setAlert] = React.useState({
     open: false,
   });
@@ -32,11 +29,11 @@ function CreatePassword() {
   });
 
   useEffect(() => {
-    const email = searchParams.get("email")
+    const email = searchParams.get("email");
     if (email) {
       setData((prevData) => ({ ...prevData, email }));
     }
-  },[searchParams])
+  }, [searchParams]);
 
   const inputOnchange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -45,19 +42,19 @@ function CreatePassword() {
   // on submit form console.log(data)
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(data)
+    console.log(data);
     if (data.password.length >= 8) {
       navigate("/");
       axios
-        .post("https://localhost:7091/api/User/ResetPassword",{
+        .post(process.env.REACT_APP_API_URL + "/User/ResetPassword", {
           password: data.password,
           confirmPassword: data.confirmPassword,
           email: data.email,
         })
         .then((response) => {
-          setAlert({ ...alert, open: true })
+          setAlert({ ...alert, open: true });
         })
-        .catch(error => console.log(error))
+        .catch((error) => console.log(error));
     } else {
       setAlert({ ...alert, open: true });
     }
