@@ -70,17 +70,16 @@ function Register() {
     } else {
       setAlert({ open: false, message: "" });
       axios
-        .post("https://localhost:7091/api/User/CreateUser", {
+        .post(process.env.REACT_APP_API_URL + "/User/CreateUser", {
           name: data.name,
           password: data.password,
           email: data.email,
         })
         .then((response) => {
-          setAlert({ ...alert, open: true })
+          setAlert({ ...alert, open: true });
         })
-        .catch(error => console.log(error));
+        .catch((error) => console.log(error));
       navigate("/login");
-
     }
   };
 

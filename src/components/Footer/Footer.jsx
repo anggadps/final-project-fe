@@ -13,11 +13,11 @@ function Footer() {
 
   useEffect(() => {
     axios
-      .get("http://52.237.194.35:2022/api/product/GetTypeProduct")
+      .get(process.env.REACT_APP_API_URL + "/Category")
       .then((response) => {
         setCategoryItems(response.data);
       })
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
   }, []);
   return (
     <div>
@@ -40,7 +40,7 @@ function Footer() {
                   <li key={item.id}>
                     <p>
                       <Link reloadDocument to={`/menuclass/${item.id}`}>
-                        {item.type_name}
+                        {item.name}
                       </Link>
                     </p>
                   </li>
@@ -51,7 +51,7 @@ function Footer() {
                   <li key={item.id}>
                     <p>
                       <Link reloadDocument to={`/menuclass/${item.id}`}>
-                        {item.type_name}
+                        {item.name}
                       </Link>
                     </p>
                   </li>
