@@ -4,6 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
+import PropTypes from "prop-types"; // Import PropTypes
 
 export default function MediaCard({ category, name, price, image }) {
   return (
@@ -36,3 +37,11 @@ export default function MediaCard({ category, name, price, image }) {
     </Card>
   );
 }
+
+
+MediaCard.propTypes = {
+  category: PropTypes.string, 
+  name: PropTypes.string.isRequired,     
+  price: PropTypes.string.isRequired,   
+  image: PropTypes.string    
+};

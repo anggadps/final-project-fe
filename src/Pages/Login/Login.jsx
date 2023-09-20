@@ -53,7 +53,7 @@ function Login() {
         })
         .then((response) => {
           setAlert({ ...alert, open: true, message: response.data });
-          navigate("/");
+          navigate("/");;
         })
         .catch((error) => {
           if (error.response) {
