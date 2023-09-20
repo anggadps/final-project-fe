@@ -5,8 +5,8 @@ import { Button } from "@mui/material";
 import { useState } from "react";
 import MuiAlert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
-import Navbar from "../../components/Navbar/Navbar-guest";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -15,6 +15,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 function Login() {
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const [alert, setAlert] = React.useState({
     open: false,
@@ -53,7 +54,8 @@ function Login() {
         })
         .then((response) => {
           setAlert({ ...alert, open: true, message: response.data });
-          navigate("/");;
+          login(response.data);
+          navigate("/");
         })
         .catch((error) => {
           if (error.response) {
@@ -73,7 +75,6 @@ function Login() {
 
   return (
     <div>
-      <Navbar />
       <div className="formDiv">
         <form onSubmit={onSubmit}>
           <h1>Welcome Back! Cheff</h1>

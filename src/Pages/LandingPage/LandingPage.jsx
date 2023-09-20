@@ -4,7 +4,6 @@ import Card from "../../components/MenuCard";
 import CategoryCard from "../../components/CategoryCard";
 import { Grid } from "@mui/material";
 import axios from "axios";
-import Navbar from "../../components/Navbar/Navbar-user";
 
 function LandingPage() {
   const [menuItems, setMenuItems] = useState([]);
@@ -28,7 +27,6 @@ function LandingPage() {
 
   return (
     <div>
-      <Navbar />
       <section className="hero">
         <div className="hero-text">
           <h1>Be the next great chef</h1>
