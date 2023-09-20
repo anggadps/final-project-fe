@@ -49,14 +49,14 @@ function Login() {
     } else {
       setAlert({ open: false, message: "" });
       axios
-        .post("https://localhost:7091/api/User/Login", {
-          password: data.password,
+        .post(process.env.REACT_APP_API_URL + "/User/Login", {
           email: data.email,
+          password: data.password,
         })
         .then((response) => {
-          setAlert({ ...alert, open: true })
+          setAlert({ ...alert, open: true });
         })
-        .catch(error => console.log(error));
+        .catch((error) => console.log(error));
       navigate("/");
     }
   };

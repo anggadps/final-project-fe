@@ -12,18 +12,18 @@ function LandingPage() {
 
   useEffect(() => {
     axios
-      .get("http://52.237.194.35:2022/api/product/GetCarsLimit")
+      .get(process.env.REACT_APP_API_URL + "/Course")
       .then((response) => {
         setMenuItems(response.data);
       })
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
 
     axios
-      .get("http://52.237.194.35:2022/api/product/GetTypeProduct")
+      .get(process.env.REACT_APP_API_URL + "/Category")
       .then((response) => {
         setCategoryItems(response.data);
       })
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
   }, []);
 
   return (
@@ -99,7 +99,7 @@ function LandingPage() {
             {categoryItems.map((item) => (
               <Grid item xs={6} sm={4} md={3} key={item.id}>
                 <CategoryCard
-                  name={item.type_name}
+                  name={item.name}
                   image={item.image}
                   id={item.id}
                 />
