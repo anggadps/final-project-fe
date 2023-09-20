@@ -5,7 +5,6 @@ import { Button } from "@mui/material";
 import { useState } from "react";
 import MuiAlert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
-import Navbar from "../../components/Navbar/Navbar-guest";
 import axios from "axios";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -72,7 +71,6 @@ function Reset() {
 
   return (
     <div>
-      <Navbar />
       <div className="formDiv">
         <form action="" onSubmit={onSubmit}>
           <h1>Reset Password</h1>

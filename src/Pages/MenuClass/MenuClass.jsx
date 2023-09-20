@@ -5,7 +5,6 @@ import { Grid } from "@mui/material";
 import Card from "../../components/MenuCard";
 import axios from "axios";
 import asian from "./images/asian.png";
-import Navbar from "../../components/Navbar/Navbar-user";
 
 const MenuClass = () => {
   const { id } = useParams();
@@ -30,7 +29,6 @@ const MenuClass = () => {
 
   return (
     <div>
-      <Navbar />
       <section className="menu-class">
         <div className="header-bg">
           <img src={asian} alt="Header" />

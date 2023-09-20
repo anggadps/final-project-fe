@@ -5,7 +5,6 @@ import { Button } from "@mui/material";
 import { useState } from "react";
 import MuiAlert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
-import Navbar from "../../components/Navbar/Navbar-guest";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 
@@ -61,7 +60,6 @@ function CreatePassword() {
   };
   return (
     <div>
-      <Navbar />
       <div className="formDiv">
         <form action="" onSubmit={onSubmit}>
           <h1>Create Password</h1>
