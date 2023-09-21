@@ -20,7 +20,7 @@ const MenuClass = () => {
       .catch((error) => console.log(error));
 
     axios
-      .get(process.env.REACT_APP_API_URL + `/Course`)
+      .get(process.env.REACT_APP_API_URL + `/Course/GetByIdCategory?id=${id}`)
       .then((response) => {
         setMenuItems(response.data);
       })
