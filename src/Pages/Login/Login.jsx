@@ -5,8 +5,8 @@ import { Button } from "@mui/material";
 import { useState } from "react";
 import MuiAlert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
-import Navbar from "../../components/Navbar/Navbar-guest";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -15,6 +15,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 function Login() {
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const [alert, setAlert] = React.useState({
     open: false,
@@ -31,38 +32,49 @@ function Login() {
   };
 
   const onSubmit = (e) => {
+    e.preventDefault();
     if (data.email === "" || data.password === "") {
       setAlert({ open: true, message: "Please fill up the form." });
-      e.preventDefault();
-    } else if (data.email.includes("@") === false) {
+    } else if (!data.email.includes("@")) {
       setAlert({
         open: true,
         message: "Email must be valid.",
       });
-      e.preventDefault();
     } else if (data.password.length < 8) {
       setAlert({
         open: true,
         message: "Password must be at least 8 characters.",
       });
-      e.preventDefault();
     } else {
       setAlert({ open: false, message: "" });
       axios
-        .post("https://localhost:7091/api/User/Login",{
-          password: data.password,
+        .post(process.env.REACT_APP_API_URL + "/User/Login", {
           email: data.email,
+          password: data.password,
         })
         .then((response) => {
-          setAlert({ ...alert, open: true })
+          setAlert({ ...alert, open: true, message: response.data });
+          login(response.data);
           navigate("/");
         })
-        .catch(error => console.log(error))
+        .catch((error) => {
+          if (error.response) {
+            // Server responded with an error (e.g., 401 Unauthorized)
+            setAlert({ ...alert, open: true, message: "Invalid credentials." });
+          } else {
+            // Network error or other issues
+            setAlert({
+              ...alert,
+              open: true,
+              message: "An error occurred. Please try again later.",
+            });
+          }
+        });
     }
   };
+
   return (
     <div>
-      <Navbar />
       <div className="formDiv">
         <form onSubmit={onSubmit}>
           <h1>Welcome Back! Cheff</h1>

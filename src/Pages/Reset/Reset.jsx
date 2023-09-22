@@ -5,29 +5,32 @@ import { Button } from "@mui/material";
 import { useState } from "react";
 import MuiAlert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
-import Navbar from "../../components/Navbar/Navbar-guest";
 import axios from "axios";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" severity="success" {...props} />;
+  return (
+    <MuiAlert
+      elevation={6}
+      ref={ref}
+      variant="filled"
+      severity="success"
+      {...props}
+    />
+  );
 });
 
 function Reset() {
-
   const [btnDisable, setBtnDisable] = useState(false);
-
-  
 
   const [alert, setAlert] = React.useState({
     open: false,
     severity: "",
-    message: ""
+    message: "",
   });
 
   const [data, setData] = useState({
     email: "",
   });
-
 
   const inputOnchange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -36,25 +39,38 @@ function Reset() {
   const onSubmit = async (e) => {
     e.preventDefault();
     if (data.email.includes("@")) {
-      setBtnDisable(true)
+      setBtnDisable(true);
       axios
-        .post(`https://localhost:7091/api/User/ForgetPassword?email=${data.email}`)
+        .post(
+          process.env.REACT_APP_API_URL +
+            `/User/ForgetPassword?email=${data.email}`
+        )
         .then((response) => {
-          setAlert({ ...alert, open: true, severity: "success", message: "Success, Please check your email for confirmation." })
-          setBtnDisable(false)
-          setData({email: ""});
+          setAlert({
+            ...alert,
+            open: true,
+            severity: "success",
+            message: "Success, Please check your email for confirmation.",
+          });
+          setBtnDisable(false);
+          setData({ email: "" });
         })
-        .catch(error => {
-          setBtnDisable(false)
-        })
+        .catch((error) => {
+          setBtnDisable(false);
+        });
     } else {
-      setAlert({ ...alert, open: true, severity: "error", message: "You have entered an invalid e-mail address. Please try again."});
+      setAlert({
+        ...alert,
+        open: true,
+        severity: "error",
+        message:
+          "You have entered an invalid e-mail address. Please try again.",
+      });
     }
   };
 
   return (
     <div>
-      <Navbar />
       <div className="formDiv">
         <form action="" onSubmit={onSubmit}>
           <h1>Reset Password</h1>

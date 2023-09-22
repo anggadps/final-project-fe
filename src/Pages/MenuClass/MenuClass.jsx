@@ -5,7 +5,6 @@ import { Grid } from "@mui/material";
 import Card from "../../components/MenuCard";
 import axios from "axios";
 import asian from "./images/asian.png";
-import Navbar from "../../components/Navbar/Navbar-user";
 
 const MenuClass = () => {
   const { id } = useParams();
@@ -14,30 +13,29 @@ const MenuClass = () => {
 
   useEffect(() => {
     axios
-      .get(`http://52.237.194.35:2022/api/product/GetCarByID?IdType=${id}`)
+      .get(process.env.REACT_APP_API_URL + `/Category/GetById?id=${id}`)
       .then((response) => {
         setData(response.data);
       })
-      .catch(error => console.log(error))
+      .catch((error) => console.log(error));
 
     axios
-      .get("http://52.237.194.35:2022/api/product/GetCarsLimit")
+      .get(process.env.REACT_APP_API_URL + `/Course/GetByIdCategory?id=${id}`)
       .then((response) => {
         setMenuItems(response.data);
       })
-      .catch(error => console.log(error))
+      .catch((error) => console.log(error));
   }, []);
 
   return (
     <div>
-      <Navbar />
       <section className="menu-class">
         <div className="header-bg">
           <img src={asian} alt="Header" />
         </div>
       </section>
       <section className="description">
-        <h1>{data.type_name}</h1>
+        <h1>{data.name}</h1>
         <p>{data.description}</p>
       </section>
 

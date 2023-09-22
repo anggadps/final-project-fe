@@ -5,7 +5,6 @@ import { Button } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../../components/Navbar/Navbar-guest";
 import axios from "axios";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -70,23 +69,21 @@ function Register() {
     } else {
       setAlert({ open: false, message: "" });
       axios
-        .post("https://localhost:7091/api/User/CreateUser",{
+        .post(process.env.REACT_APP_API_URL + "/User/CreateUser", {
           name: data.name,
           password: data.password,
           email: data.email,
         })
         .then((response) => {
-          setAlert({ ...alert, open: true })
-          navigate("/login");
+          setAlert({ ...alert, open: true });
         })
-        .catch(error => console.log(error))
-      
+        .catch((error) => console.log(error));
+      navigate("/login");
     }
   };
 
   return (
     <div>
-      <Navbar />
       <div className="formDiv">
         <form onSubmit={onSubmit}>
           <h1>Are you ready become a professional cheff?</h1>

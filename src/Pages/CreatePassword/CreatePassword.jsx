@@ -5,7 +5,6 @@ import { Button } from "@mui/material";
 import { useState } from "react";
 import MuiAlert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
-import Navbar from "../../components/Navbar/Navbar-guest";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 
@@ -16,9 +15,6 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 function CreatePassword() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-
-
- 
 
   const [alert, setAlert] = React.useState({
     open: false,
@@ -32,11 +28,11 @@ function CreatePassword() {
   });
 
   useEffect(() => {
-    const email = searchParams.get("email")
+    const email = searchParams.get("email");
     if (email) {
       setData((prevData) => ({ ...prevData, email }));
     }
-  },[searchParams])
+  }, [searchParams]);
 
   const inputOnchange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -45,26 +41,25 @@ function CreatePassword() {
   // on submit form console.log(data)
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(data)
+    console.log(data);
     if (data.password.length >= 8) {
       navigate("/");
       axios
-        .post("https://localhost:7091/api/User/ResetPassword",{
+        .post(process.env.REACT_APP_API_URL + "/User/ResetPassword", {
           password: data.password,
           confirmPassword: data.confirmPassword,
           email: data.email,
         })
         .then((response) => {
-          setAlert({ ...alert, open: true })
+          setAlert({ ...alert, open: true });
         })
-        .catch(error => console.log(error))
+        .catch((error) => console.log(error));
     } else {
       setAlert({ ...alert, open: true });
     }
   };
   return (
     <div>
-      <Navbar />
       <div className="formDiv">
         <form action="" onSubmit={onSubmit}>
           <h1>Create Password</h1>

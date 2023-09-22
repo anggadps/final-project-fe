@@ -4,7 +4,6 @@ import Card from "../../components/MenuCard";
 import CategoryCard from "../../components/CategoryCard";
 import { Grid } from "@mui/material";
 import axios from "axios";
-import Navbar from "../../components/Navbar/Navbar-user";
 
 function LandingPage() {
   const [menuItems, setMenuItems] = useState([]);
@@ -12,23 +11,22 @@ function LandingPage() {
 
   useEffect(() => {
     axios
-      .get("http://52.237.194.35:2022/api/product/GetCarsLimit")
+      .get(process.env.REACT_APP_API_URL + "/Course")
       .then((response) => {
         setMenuItems(response.data);
       })
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
 
     axios
-      .get("http://52.237.194.35:2022/api/product/GetTypeProduct")
+      .get(process.env.REACT_APP_API_URL + "/Category")
       .then((response) => {
         setCategoryItems(response.data);
       })
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
   }, []);
 
   return (
     <div>
-      <Navbar />
       <section className="hero">
         <div className="hero-text">
           <h1>Be the next great chef</h1>
@@ -99,7 +97,7 @@ function LandingPage() {
             {categoryItems.map((item) => (
               <Grid item xs={6} sm={4} md={3} key={item.id}>
                 <CategoryCard
-                  name={item.type_name}
+                  name={item.name}
                   image={item.image}
                   id={item.id}
                 />
