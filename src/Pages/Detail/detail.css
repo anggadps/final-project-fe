@@ -1,0 +1,35 @@
+.detail-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    gap: 40px;
+}
+
+.detail-course {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    gap: 25px;
+}
+
+.detail-course p {
+    color: var(--Gray-3, #828282);
+    font-family: Montserrat;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+@media (max-width: 800px) {
+    .menu-class {
+        flex-direction: column;
+    }
+
+    .description {
+        flex-direction: column;
+    }
+}

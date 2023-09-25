@@ -10,6 +10,7 @@ import CreatePassword from "./Pages/CreatePassword/CreatePassword";
 import MenuClass from "./Pages/MenuClass/MenuClass";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { AuthProvider } from "./contexts/AuthContext";
+import Detail from "./Pages/Detail/Detail";
 
 const theme = createTheme({
   typography: {
@@ -37,6 +38,7 @@ function App() {
           <Route path="/reset" element={<Reset />} />
           <Route path="/" element={<LandingPage />} />
           <Route path="/menuclass/:id" element={<MenuClass />} />
+          <Route path="/detail" element={<Detail />} />
         </Routes>
         <Footer />
       </ThemeProvider>
