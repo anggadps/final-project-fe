@@ -8,6 +8,7 @@ import Reset from "./Pages/Reset/Reset";
 import LandingPage from "./Pages/LandingPage/LandingPage";
 import CreatePassword from "./Pages/CreatePassword/CreatePassword";
 import MenuClass from "./Pages/MenuClass/MenuClass";
+import Cart from "./Pages/Cart/Cart";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { AuthProvider } from "./contexts/AuthContext";
 
@@ -37,6 +38,7 @@ function App() {
           <Route path="/reset" element={<Reset />} />
           <Route path="/" element={<LandingPage />} />
           <Route path="/menuclass/:id" element={<MenuClass />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
         <Footer />
       </ThemeProvider>
