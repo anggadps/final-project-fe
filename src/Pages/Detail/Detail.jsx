@@ -155,10 +155,11 @@ const Detail = () => {
                         return (
                             <Grid item xs={13} sm={6} md={4} key={item.id}>
                                 <Card
-                                    category={item.typeCar}
+                                    category={item.category}
                                     name={item.name}
                                     price={item.price}
                                     image={item.image}
+                                    id={item.id}
                                 />
                             </Grid>
                         );

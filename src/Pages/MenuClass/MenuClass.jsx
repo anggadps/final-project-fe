@@ -52,6 +52,7 @@ const MenuClass = () => {
                   name={item.name}
                   price={item.price}
                   image={item.image}
+                  id={item.id}
                 />
               </Grid>
             );
