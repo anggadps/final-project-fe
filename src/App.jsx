@@ -38,7 +38,7 @@ function App() {
           <Route path="/reset" element={<Reset />} />
           <Route path="/" element={<LandingPage />} />
           <Route path="/menuclass/:id" element={<MenuClass />} />
-          <Route path="/detail" element={<Detail />} />
+          <Route path="/detail/:id" element={<Detail />} />
         </Routes>
         <Footer />
       </ThemeProvider>

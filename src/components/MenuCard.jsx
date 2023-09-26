@@ -4,12 +4,12 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
-import PropTypes from "prop-types"; // Import PropTypes
+import PropTypes from "prop-types"; 
 
-export default function MediaCard({ category, name, price, image }) {
+export default function MediaCard({ category, name, price, image, id }) {
   return (
     <Card sx={{ maxWidth: 500 }}>
-      <CardActionArea href="/detail">
+      <CardActionArea href={`/detail/${id}`}>
         <CardMedia
           sx={{ height: 140 }}
           image="http://via.placeholder.com/600"
