@@ -66,7 +66,7 @@ function LandingPage() {
                   category={item.category}
                   name={item.name}
                   price={item.price}
-                  image={item.image}
+                  image={item.img}
                   id={item.id}
                 />
               </Grid>

@@ -17,13 +17,13 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import PaymentModal from "../../components/PaymentModal";
-import useAuth from '../../hooks/useAuth';
+import useAuth from "../../hooks/useAuth";
 
 const Cart = () => {
   const [course, setCourse] = useState([]);
   const [paymentModalOpen, setPaymentModalOpen] = useState(false);
-  const { payload } = useAuth()
-  axios.defaults.headers.common['Authorization'] = `Bearer ${payload.token}`
+  const { payload } = useAuth();
+  axios.defaults.headers.common["Authorization"] = `Bearer ${payload.token}`;
 
   const openPaymentModal = () => {
     setPaymentModalOpen(true);
@@ -42,7 +42,6 @@ const Cart = () => {
       .catch((error) => console.log(error));
   }, []);
 
-  
   return (
     <>
       <div>
@@ -71,7 +70,7 @@ const Cart = () => {
                     <Card sx={{ display: "flex", minWidth: 275 }}>
                       <CardMedia sx={{ flex: "0 0 100px" }}>
                         <img
-                          src="http://via.placeholder.com/600"
+                          src={`https://localhost:7091/images/${item.img}`}
                           alt="Header"
                           style={{ maxWidth: "100%", height: "auto" }}
                         />
@@ -82,10 +81,10 @@ const Cart = () => {
                           color="text.secondary"
                           gutterBottom
                         >
-                          {item.id_category}
+                          {item.category_name}
                         </Typography>
                         <Typography variant="h5" component="div">
-                          {item.name}
+                          {item.course_name}
                         </Typography>
                         <Typography
                           variant="h5"
@@ -93,6 +92,12 @@ const Cart = () => {
                           component="div"
                         >
                           Rp.{item.price}
+                        </Typography>
+                        <Typography
+                          sx={{ fontSize: 14 }}
+                          color="text.secondary"
+                        >
+                          {item.schedule_date}
                         </Typography>
                       </CardContent>
                     </Card>
