@@ -1,7 +1,7 @@
 import React from "react";
 import "./component.css";
 import { Button } from "@mui/material";
-import { Outlet, Link, useNavigate } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 import logo from "./logo.png";
 import useAuth from "../../hooks/useAuth";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -10,7 +10,6 @@ import LogoutIcon from "@mui/icons-material/Logout";
 
 function Navbar() {
   const { isLoggedIn, logout } = useAuth();
-  const navigate = useNavigate();
 
   return (
     <div>
@@ -23,10 +22,7 @@ function Navbar() {
         <div className="button-container">
           {isLoggedIn ? (
             <>
-              <ShoppingCartIcon
-                onClick={() => navigate("/cart")}
-                color="secondary"
-              />
+              <ShoppingCartIcon color="secondary" />
               <p>
                 <Link reloadDocument to={`/menuclass/1`}>
                   My Class

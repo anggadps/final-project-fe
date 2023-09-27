@@ -38,6 +38,7 @@ export default function MediaCard({ category, name, price, image, id }) {
   );
 }
 
+
 MediaCard.propTypes = {
   id: PropTypes.string.isRequired,
   category: PropTypes.string, 

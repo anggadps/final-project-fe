@@ -1,9 +1,0 @@
-.cart-card {
-  display: flex;
-  flex-direction: row;
-}
-
-.cart-card img {
-  width: 100px;
-  height: 100px;
-}
