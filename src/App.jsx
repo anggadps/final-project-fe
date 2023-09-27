@@ -41,7 +41,7 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/menuclass/:id" element={<MenuClass />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/detail" element={<Detail />} />
+          <Route path="/detail/:id" element={<Detail />} />
         </Routes>
         <Footer />
       </ThemeProvider>
