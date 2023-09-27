@@ -16,6 +16,7 @@ const Detail = () => {
     const [menuItems, setMenuItems] = useState([]);
     const [data, setData] = useState([]);
     const [dataCategory, setDataCategory] = useState([]);
+    const [dataSchedule, setDataSchedule] = useState([]);
 
     useEffect(() => {
         axios
@@ -27,8 +28,16 @@ const Detail = () => {
                 setDataIdCategory(idCategory);
             })
             .catch((error) => console.log(error));
+        
+        axios
+            .get(process.env.REACT_APP_API_URL + `/Schedule/GetById?id=${id}`)
+            .then((response) => {
+                setDataSchedule(response.data);
+            })
+            .catch((error) => console.log(error));
     }, [id]);
 
+    console.log(dataSchedule)
 
     useEffect(() => {
         if (dataIdCategory !== undefined) {
@@ -104,9 +113,9 @@ const Detail = () => {
                             labelId="select-label"
                             label="Select Schedule"
                         >
-                            <MenuItem >Item 1</MenuItem>
-                            <MenuItem >Item 2</MenuItem>
-                            <MenuItem >Item 3</MenuItem>
+                            {dataSchedule.map((list) => (
+                                <MenuItem value={list.id} key={list.id}>{list.schedule_date}</MenuItem>
+                            ))}
                         </Select>
                     </FormControl>
 

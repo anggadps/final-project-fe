@@ -17,10 +17,13 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import PaymentModal from "../../components/PaymentModal";
+import useAuth from '../../hooks/useAuth';
 
 const Cart = () => {
   const [course, setCourse] = useState([]);
   const [paymentModalOpen, setPaymentModalOpen] = useState(false);
+  const { payload } = useAuth()
+  axios.defaults.headers.common['Authorization'] = `Bearer ${payload.token}`
 
   const openPaymentModal = () => {
     setPaymentModalOpen(true);
@@ -32,12 +35,14 @@ const Cart = () => {
 
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_API_URL + `/Course`)
+      .get(process.env.REACT_APP_API_URL + `/Cart/GetCartByIdUser`)
       .then((response) => {
         setCourse(response.data);
       })
       .catch((error) => console.log(error));
   }, []);
+
+  
   return (
     <>
       <div>
