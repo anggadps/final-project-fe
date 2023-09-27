@@ -20,7 +20,7 @@ import PaymentModal from "../../components/PaymentModal";
 import useAuth from '../../hooks/useAuth';
 
 const Cart = () => {
-  const [course, setCourse] = useState([]);
+  const [cart, setCart] = useState([]);
   const [paymentModalOpen, setPaymentModalOpen] = useState(false);
   const { payload } = useAuth()
   axios.defaults.headers.common['Authorization'] = `Bearer ${payload.token}`
@@ -37,7 +37,7 @@ const Cart = () => {
     axios
       .get(process.env.REACT_APP_API_URL + `/Cart/GetCartByIdUser`)
       .then((response) => {
-        setCourse(response.data);
+        console.log(response)
       })
       .catch((error) => console.log(error));
   }, []);
@@ -57,7 +57,7 @@ const Cart = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {course.map((item) => (
+              {cart.map((item) => (
                 <TableRow key={item.id}>
                   <TableCell
                     style={{
@@ -128,13 +128,13 @@ const Cart = () => {
                     </Typography>
                     <Typography variant="h5" component="div" color="primary">
                       Rp.
-                      {course.reduce((total, item) => total + item.price, 0)}
+                      {cart.reduce((total, item) => total + item.price, 0)}
                     </Typography>
                   </Box>
                   <Box>
                     <PaymentModal
                       handleClose={closePaymentModal}
-                      course={course}
+                      cart={cart}
                     />
                   </Box>
                 </TableCell>
