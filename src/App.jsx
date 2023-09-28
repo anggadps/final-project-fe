@@ -7,7 +7,7 @@ import Register from "./Pages/Register/Register";
 import Reset from "./Pages/Reset/Reset";
 import LandingPage from "./Pages/LandingPage/LandingPage";
 import CreatePassword from "./Pages/CreatePassword/CreatePassword";
-
+import MyClass from "./Pages/MyClass/MyClass";
 import MenuClass from "./Pages/MenuClass/MenuClass";
 import Cart from "./Pages/Cart/Cart";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
@@ -42,6 +42,7 @@ function App() {
           <Route path="/menuclass/:id" element={<MenuClass />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/detail/:id" element={<Detail />} />
+          <Route path="/myclass" element={<MyClass />} />
         </Routes>
         <Footer />
       </ThemeProvider>

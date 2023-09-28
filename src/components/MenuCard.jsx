@@ -11,7 +11,7 @@ export default function MediaCard({ category, name, price, image, id }) {
     <Card sx={{ maxWidth: 500 }}>
       <CardActionArea href={`/detail/${id}`}>
         <CardMedia
-          sx={{ height: 140 }}
+          sx={{ height: 140, }}
           image={`https://localhost:7091/images/${image}`}
           title={name}
         />

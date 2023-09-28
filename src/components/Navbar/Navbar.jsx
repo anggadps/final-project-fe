@@ -28,7 +28,7 @@ function Navbar() {
                 color="secondary"
               />
               <p>
-                <Link reloadDocument to={`/menuclass/1`}>
+                <Link reloadDocument to={`/myclass`}>
                   My Class
                 </Link>
               </p>
