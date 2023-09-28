@@ -21,6 +21,7 @@ import useAuth from "../../hooks/useAuth";
 
 const Cart = () => {
   const [course, setCourse] = useState([]);
+  const [isCheckCart, setIsCheckCart] = useState([]);
   const [paymentModalOpen, setPaymentModalOpen] = useState(false);
   const { payload } = useAuth();
   axios.defaults.headers.common["Authorization"] = `Bearer ${payload.token}`;
@@ -32,6 +33,27 @@ const Cart = () => {
   const closePaymentModal = () => {
     setPaymentModalOpen(false);
   };
+
+  useEffect(() => {
+    console.log(isCheckCart);
+  },[isCheckCart]);
+
+  const checkedCart = (row) => {
+    console.log(row)
+    const checkIsExist = isCheckCart.find((value) => value.id === row.id)
+    if (checkIsExist) {
+      const newData =  isCheckCart.filter((value) => value.id !== row.id)  
+      setIsCheckCart(newData)
+    } else {
+      const data = {
+        id: row.id,
+        schedule_id: row.id_schedule,
+        course_id: row.id_course,
+        price: row.price
+      }
+      setIsCheckCart([...isCheckCart, data])
+    }
+  }
 
   useEffect(() => {
     axios
@@ -66,7 +88,7 @@ const Cart = () => {
                       padding: "2rem",
                     }}
                   >
-                    <Checkbox color="primary" />
+                    <Checkbox onChange={(e) => checkedCart(item)} color="primary" />
                     <Card sx={{ display: "flex", minWidth: 275 }}>
                       <CardMedia sx={{ flex: "0 0 100px" }}>
                         <img
@@ -79,8 +101,7 @@ const Cart = () => {
                         <Typography
                           sx={{ fontSize: 14 }}
                           color="text.secondary"
-                          gutterBottom
-                        >
+                          gutterBottom>
                           {item.category_name}
                         </Typography>
                         <Typography variant="h5" component="div">
