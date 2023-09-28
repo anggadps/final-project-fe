@@ -26,6 +26,7 @@ function Navbar() {
               <ShoppingCartIcon
                 onClick={() => navigate("/cart")}
                 color="secondary"
+                cursor="pointer"
               />
               <p>
                 <Link reloadDocument to={`/myclass`}>

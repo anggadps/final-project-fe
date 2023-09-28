@@ -10,9 +10,11 @@ import CreatePassword from "./Pages/CreatePassword/CreatePassword";
 import MyClass from "./Pages/MyClass/MyClass";
 import MenuClass from "./Pages/MenuClass/MenuClass";
 import Cart from "./Pages/Cart/Cart";
+import Invoice from "./Pages/Invoice/Invoice";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { AuthProvider } from "./contexts/AuthContext";
 import Detail from "./Pages/Detail/Detail";
+import DetailInvoice from "./Pages/DetailInvoice/DetailInvoice";
 
 const theme = createTheme({
   typography: {
@@ -43,6 +45,8 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/detail/:id" element={<Detail />} />
           <Route path="/myclass" element={<MyClass />} />
+          <Route path="/invoice" element={<Invoice />} />
+          <Route path="/detail-invoice/:id" element={<DetailInvoice />} />
         </Routes>
         <Footer />
       </ThemeProvider>
