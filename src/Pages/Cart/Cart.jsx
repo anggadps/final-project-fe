@@ -34,26 +34,70 @@ const Cart = () => {
     setPaymentModalOpen(false);
   };
 
+  const formatDate = (inputDate) => {
+    const date = new Date(inputDate);
+
+    const days = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
+    const dayOfWeek = days[date.getDay()];
+    const dayOfMonth = date.getDate();
+    const month = months[date.getMonth()];
+    const year = date.getFullYear();
+
+    return `${dayOfWeek}, ${dayOfMonth} ${month} ${year}`;
+  };
+
+  const deleteCart = () => {
+    axios
+      .delete(process.env.REACT_APP_API_URL + `/Cart`)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => console.log(error));
+  };
+
   useEffect(() => {
     console.log(isCheckCart);
-  },[isCheckCart]);
+  }, [isCheckCart]);
 
   const checkedCart = (row) => {
-    console.log(row)
-    const checkIsExist = isCheckCart.find((value) => value.id === row.id)
+    console.log(row);
+    const checkIsExist = isCheckCart.find((value) => value.id === row.id);
     if (checkIsExist) {
-      const newData =  isCheckCart.filter((value) => value.id !== row.id)  
-      setIsCheckCart(newData)
+      const newData = isCheckCart.filter((value) => value.id !== row.id);
+      setIsCheckCart(newData);
     } else {
       const data = {
         id: row.id,
         id_schedule: row.id_schedule,
         id_course: row.id_course,
-        price: row.price
-      }
-      setIsCheckCart([...isCheckCart, data])
+        price: row.price,
+      };
+      setIsCheckCart([...isCheckCart, data]);
     }
-  }
+  };
 
   useEffect(() => {
     axios
@@ -88,7 +132,10 @@ const Cart = () => {
                       padding: "2rem",
                     }}
                   >
-                    <Checkbox onChange={(e) => checkedCart(item)} color="primary" />
+                    <Checkbox
+                      onChange={(e) => checkedCart(item)}
+                      color="primary"
+                    />
                     <Card sx={{ display: "flex", minWidth: 275 }}>
                       <CardMedia sx={{ flex: "0 0 100px" }}>
                         <img
@@ -101,7 +148,8 @@ const Cart = () => {
                         <Typography
                           sx={{ fontSize: 14 }}
                           color="text.secondary"
-                          gutterBottom>
+                          gutterBottom
+                        >
                           {item.category_name}
                         </Typography>
                         <Typography variant="h5" component="div">
@@ -118,7 +166,7 @@ const Cart = () => {
                           sx={{ fontSize: 14 }}
                           color="text.secondary"
                         >
-                          {item.schedule_date}
+                          {formatDate(item.schedule_date)}
                         </Typography>
                       </CardContent>
                     </Card>
@@ -126,7 +174,7 @@ const Cart = () => {
                   <TableCell>
                     <DeleteForeverIcon
                       style={{ cursor: "pointer", color: "red", fontSize: 40 }}
-                      onClick={() => console.log("delete")}
+                      onClick={() => deleteCart()}
                     />
                   </TableCell>
                 </TableRow>
