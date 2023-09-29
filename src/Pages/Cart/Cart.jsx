@@ -47,8 +47,8 @@ const Cart = () => {
     } else {
       const data = {
         id: row.id,
-        schedule_id: row.id_schedule,
-        course_id: row.id_course,
+        id_schedule: row.id_schedule,
+        id_course: row.id_course,
         price: row.price
       }
       setIsCheckCart([...isCheckCart, data])
