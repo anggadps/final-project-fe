@@ -36,13 +36,13 @@ const Cart = () => {
 
   useEffect(() => {
     console.log(isCheckCart);
-  },[isCheckCart]);
+  }, [isCheckCart]);
 
   const checkedCart = (row) => {
     console.log(row)
     const checkIsExist = isCheckCart.find((value) => value.id === row.id)
     if (checkIsExist) {
-      const newData =  isCheckCart.filter((value) => value.id !== row.id)  
+      const newData = isCheckCart.filter((value) => value.id !== row.id)
       setIsCheckCart(newData)
     } else {
       const data = {
@@ -63,6 +63,10 @@ const Cart = () => {
       })
       .catch((error) => console.log(error));
   }, []);
+
+  const selectedTotalPrice = isCheckCart.reduce(
+    (total, item) => total + item.price, 0
+  );
 
   return (
     <>
@@ -153,8 +157,7 @@ const Cart = () => {
                       Total Price
                     </Typography>
                     <Typography variant="h5" component="div" color="primary">
-                      Rp.
-                      {course.reduce((total, item) => total + item.price, 0)}
+                      Rp. {selectedTotalPrice}
                     </Typography>
                   </Box>
                   <Box>
