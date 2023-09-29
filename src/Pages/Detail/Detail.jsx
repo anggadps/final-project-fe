@@ -2,7 +2,7 @@ import "./detail.css";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Button, Grid, Box, Typography } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -11,6 +11,7 @@ import Card from "../../components/MenuCard";
 import useAuth from "../../hooks/useAuth";
 
 const Detail = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [dataIdCategory, setDataIdCategory] = useState();
   const [menuItems, setMenuItems] = useState([]);
@@ -65,6 +66,7 @@ const Detail = () => {
       })
       .then((response) => {
         console.log(response.data);
+        navigate("/cart");
       })
       .catch((error) => console.log(error));
   };

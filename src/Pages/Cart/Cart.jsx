@@ -108,6 +108,11 @@ const Cart = () => {
       .catch((error) => console.log(error));
   }, []);
 
+  const selectedTotalPrice = isCheckCart.reduce(
+    (total, item) => total + item.price,
+    0
+  );
+
   return (
     <>
       <div>
@@ -201,8 +206,7 @@ const Cart = () => {
                       Total Price
                     </Typography>
                     <Typography variant="h5" component="div" color="primary">
-                      Rp.
-                      {course.reduce((total, item) => total + item.price, 0)}
+                      Rp. {selectedTotalPrice}
                     </Typography>
                   </Box>
                   <Box>
