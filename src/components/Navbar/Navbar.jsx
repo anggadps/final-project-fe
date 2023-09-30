@@ -45,7 +45,11 @@ function Navbar() {
               </p>
               <p>|</p>
               <PersonIcon color="primary" />
-              <LogoutIcon onClick={handleLogout} color="secondary" />
+              <LogoutIcon
+                onClick={handleLogout}
+                cursor="pointer"
+                color="secondary"
+              />
             </>
           ) : (
             <>

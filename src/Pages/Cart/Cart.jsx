@@ -69,11 +69,13 @@ const Cart = () => {
     return `${dayOfWeek}, ${dayOfMonth} ${month} ${year}`;
   };
 
-  const deleteCart = () => {
+  // Delete Cart
+  const deleteCart = (id) => {
     axios
-      .delete(process.env.REACT_APP_API_URL + `/Cart`)
+      .delete(process.env.REACT_APP_API_URL + `/Cart?id=${id}`)
       .then((response) => {
         console.log(response);
+        setCourse(course.filter((item) => item.id !== id));
       })
       .catch((error) => console.log(error));
   };
@@ -144,7 +146,7 @@ const Cart = () => {
                     <Card sx={{ display: "flex", minWidth: 275 }}>
                       <CardMedia sx={{ flex: "0 0 100px" }}>
                         <img
-                          src={`https://localhost:7091/images/${item.img}`}
+                          src={`https://localhost:7091/images/${item.image}`}
                           alt="Header"
                           style={{ maxWidth: "100%", height: "auto" }}
                         />
@@ -179,7 +181,7 @@ const Cart = () => {
                   <TableCell>
                     <DeleteForeverIcon
                       style={{ cursor: "pointer", color: "red", fontSize: 40 }}
-                      onClick={() => deleteCart()}
+                      onClick={() => deleteCart(item.id)}
                     />
                   </TableCell>
                 </TableRow>
@@ -213,6 +215,7 @@ const Cart = () => {
                     <PaymentModal
                       handleClose={closePaymentModal}
                       course={course}
+                      isCheckCart={isCheckCart}
                     />
                   </Box>
                 </TableCell>

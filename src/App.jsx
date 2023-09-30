@@ -15,6 +15,8 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { AuthProvider } from "./contexts/AuthContext";
 import Detail from "./Pages/Detail/Detail";
 import DetailInvoice from "./Pages/DetailInvoice/DetailInvoice";
+import SuccessPurchase from "./Pages/SuccessPurchase/SuccessPurchase";
+import SuccessRegister from "./Pages/SuccessRegister/SuccessRegister";
 
 const theme = createTheme({
   typography: {
@@ -47,6 +49,8 @@ function App() {
           <Route path="/myclass" element={<MyClass />} />
           <Route path="/invoice" element={<Invoice />} />
           <Route path="/detail-invoice/:id" element={<DetailInvoice />} />
+          <Route path="/success-purchase" element={<SuccessPurchase />} />
+          <Route path="/success-register" element={<SuccessRegister />} />
         </Routes>
         <Footer />
       </ThemeProvider>
