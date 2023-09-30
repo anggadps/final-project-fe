@@ -85,13 +85,13 @@ const Cart = () => {
 
   const checkedCart = (row) => {
     console.log(row);
-    const checkIsExist = isCheckCart.find((value) => value.id === row.id);
+    const checkIsExist = isCheckCart.find((value) => value.id_cart === row.id);
     if (checkIsExist) {
-      const newData = isCheckCart.filter((value) => value.id !== row.id);
+      const newData = isCheckCart.filter((value) => value.id_cart !== row.id);
       setIsCheckCart(newData);
     } else {
       const data = {
-        id: row.id,
+        id_cart: row.id,
         id_schedule: row.id_schedule,
         id_course: row.id_course,
         price: row.price,

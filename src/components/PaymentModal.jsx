@@ -38,6 +38,7 @@ export default function BasicModal(props) {
     const cart = props.isCheckCart;
 
     const orderDetails = cart.map((cartItem) => ({
+      id_cart: cartItem.id_cart,
       id_schedule: cartItem.id_schedule,
       id_course: cartItem.id_course,
       price: cartItem.price,

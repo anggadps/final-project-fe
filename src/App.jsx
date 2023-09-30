@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
 import Login from "./Pages/Login/Login";
@@ -17,6 +17,9 @@ import Detail from "./Pages/Detail/Detail";
 import DetailInvoice from "./Pages/DetailInvoice/DetailInvoice";
 import SuccessPurchase from "./Pages/SuccessPurchase/SuccessPurchase";
 import SuccessRegister from "./Pages/SuccessRegister/SuccessRegister";
+import Layout from "./admin/Layout/Layout";
+import Dashboard from "./admin/Dashboard/Dashboard";
+import Course from "./admin/Course/Course";
 
 const theme = createTheme({
   typography: {
@@ -29,32 +32,49 @@ const theme = createTheme({
     secondary: {
       main: "#5B4947",
     },
+    error: {
+      main: "#F44336",
+    },
   },
 });
 
 function App() {
+  const location = useLocation();
+
+  // Check if the current route is in the admin section
+  const isAdminRoute = location.pathname.startsWith("/admin");
+
   return (
-    <AuthProvider>
+    <>
       <ThemeProvider theme={theme}>
-        <Navbar />
+        <AuthProvider>
+          {!isAdminRoute && <Navbar />}
+          <Routes>
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/createpassword" element={<CreatePassword />} />
+            <Route path="/reset" element={<Reset />} />
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/menuclass/:id" element={<MenuClass />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/detail/:id" element={<Detail />} />
+            <Route path="/myclass" element={<MyClass />} />
+            <Route path="/invoice" element={<Invoice />} />
+            <Route path="/detail-invoice/:id" element={<DetailInvoice />} />
+            <Route path="/success-purchase" element={<SuccessPurchase />} />
+            <Route path="/success-register" element={<SuccessRegister />} />
+          </Routes>
+          {!isAdminRoute && <Footer />}
+        </AuthProvider>
+
         <Routes>
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/createpassword" element={<CreatePassword />} />
-          <Route path="/reset" element={<Reset />} />
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/menuclass/:id" element={<MenuClass />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/detail/:id" element={<Detail />} />
-          <Route path="/myclass" element={<MyClass />} />
-          <Route path="/invoice" element={<Invoice />} />
-          <Route path="/detail-invoice/:id" element={<DetailInvoice />} />
-          <Route path="/success-purchase" element={<SuccessPurchase />} />
-          <Route path="/success-register" element={<SuccessRegister />} />
+          <Route path="/admin/*" element={<Layout />}>
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="course" element={<Course />} />
+          </Route>
         </Routes>
-        <Footer />
       </ThemeProvider>
-    </AuthProvider>
+    </>
   );
 }
 
