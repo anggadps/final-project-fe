@@ -51,7 +51,7 @@ const MenuClass = () => {
                   category={item.typeCar}
                   name={item.name}
                   price={item.price}
-                  image={item.image}
+                  image={item.img}
                   id={item.id}
                 />
               </Grid>

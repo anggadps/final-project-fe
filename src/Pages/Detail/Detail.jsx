@@ -22,6 +22,41 @@ const Detail = () => {
   const { payload } = useAuth();
   axios.defaults.headers.common["Authorization"] = `Bearer ${payload.token}`;
 
+  const formatDate = (inputDate) => {
+    const date = new Date(inputDate);
+
+    const days = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
+    const dayOfWeek = days[date.getDay()];
+    const dayOfMonth = date.getDate();
+    const month = months[date.getMonth()];
+    const year = date.getFullYear();
+
+    return `${dayOfWeek}, ${dayOfMonth} ${month} ${year}`;
+  };
+
   const addCart = (e) => {
     axios
       .post(process.env.REACT_APP_API_URL + `/Cart/AddCart`, {
@@ -148,7 +183,7 @@ const Detail = () => {
             >
               {dataSchedule.map((list) => (
                 <MenuItem value={list.id} key={list.id}>
-                  {list.schedule_date}
+                  {formatDate(list.schedule_date)}
                 </MenuItem>
               ))}
             </Select>
@@ -212,7 +247,7 @@ const Detail = () => {
                   category={item.category}
                   name={item.name}
                   price={item.price}
-                  image={item.image}
+                  image={item.img}
                   id={item.id}
                 />
               </Grid>
