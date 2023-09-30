@@ -54,6 +54,10 @@ const DetailInvoice = () => {
   const { payload } = useAuth();
   axios.defaults.headers.common["Authorization"] = `Bearer ${payload.token}`;
 
+  const noInvoice = invoiceDetail.length > 0 ? invoiceDetail[0].no_invoice : '';
+  const payDate = invoiceDetail.length > 0 ? invoiceDetail[0].pay_date : '';
+  const totalPrice = invoiceDetail.length > 0 ? invoiceDetail[0].total_price : '';
+
   useEffect(() => {
     axios
       .get(process.env.REACT_APP_API_URL + `/Order/ViewInvoiceDetail?id=${id}`)
@@ -64,10 +68,10 @@ const DetailInvoice = () => {
           no: no_urut++, 
         }));
         setInvoiceDetail(dataWithNoUrut);
-        console.log(invoiceDetail);
       })
       .catch((error) => console.log(error));
   }, []);
+
 
   return (
     <div>
@@ -95,14 +99,14 @@ const DetailInvoice = () => {
           }}
         >
           <Box>
-            <Typography>No. Invoice :  </Typography>
-            <Typography>Date : </Typography>
+            <Typography>No. Invoice : {noInvoice} </Typography>
+            <Typography>Date : {payDate} </Typography>
           </Box>
           <Typography
             variant="h6"
             sx={{ color: "#4F4F4F", fontWeight: "bold", mt: { sm: 0, xs: 1 } }}
           >
-            Total Price
+            Total Price : Rp. {totalPrice}
           </Typography>
         </Box>
         <TableContainer sx={{ mt: 3 }} component={Paper}>
