@@ -1,28 +1,63 @@
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
+import axios from "axios";
+import useAuth from "../../hooks/useAuth";
 
 const MyClass = () => {
-  const dummyData = [
-    {
-      id: 1,
-      img: "img",
-      category_name: "Category 1",
-      course_name: "Course Name 1",
-      schedule_date: "2023-09-28",
-    },
-    {
-      id: 2,
-      img: "img",
-      category_name: "Category 2",
-      course_name: "Course Name 2",
-      schedule_date: "2023-09-29",
-    },
-  ];
+  const [myClass, setmyClass] = useState([]);
+  const { payload } = useAuth();
+  axios.defaults.headers.common["Authorization"] = `Bearer ${payload.token}`;
+
+  const formatDate = (inputDate) => {
+    const date = new Date(inputDate);
+
+    const days = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
+    const dayOfWeek = days[date.getDay()];
+    const dayOfMonth = date.getDate();
+    const month = months[date.getMonth()];
+    const year = date.getFullYear();
+
+    return `${dayOfWeek}, ${dayOfMonth} ${month} ${year}`;
+  };
+
+  useEffect(() => {
+    axios
+      .get(process.env.REACT_APP_API_URL + `/Order/ViewMyClass`)
+      .then((response) => {
+        setmyClass(response.data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   return (
     <div>
-      {dummyData.map((list) => (
+      {myClass.map((list) => (
         <Stack
           sx={{ borderBottom: 3, borderColor: "grey.300", mx: 10, py: 5 }}
           direction="row"
@@ -30,7 +65,7 @@ const MyClass = () => {
           <Box
             component="img"
             sx={{ height: "140px" }}
-            src="https://placehold.co/600x400/EEE/31343C"
+            src={`https://localhost:7091/images/${list.img}`}
           />
           <Box sx={{ px: 3 }}>
             <Typography sx={{ pb: 1 }}>{list.category_name}</Typography>
@@ -41,7 +76,7 @@ const MyClass = () => {
               variant="h6"
               sx={{ color: "#FABC1D", pb: 1, fontWeight: "bold" }}
             >
-              {list.schedule_date}
+              {formatDate(list.schedule_date)}
             </Typography>
           </Box>
         </Stack>

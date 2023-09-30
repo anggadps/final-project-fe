@@ -35,8 +35,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-
-
 // // create dummy data for invoice
 // function createData(no, no_invoice, date, total_course, total_price) {
 //   return { no, no_invoice, date, total_course, total_price };
@@ -100,7 +98,6 @@ const Invoice = () => {
   const { payload } = useAuth();
   axios.defaults.headers.common["Authorization"] = `Bearer ${payload.token}`;
 
-
   useEffect(() => {
     axios
       .get(process.env.REACT_APP_API_URL + `/Order/ViewInvoice`)
@@ -108,7 +105,7 @@ const Invoice = () => {
         let no_urut = 1;
         const dataWithNoUrut = response.data.map((item) => ({
           ...item,
-          no: no_urut++, 
+          no: no_urut++,
         }));
         setInvoice(dataWithNoUrut);
       })
@@ -116,7 +113,7 @@ const Invoice = () => {
   }, []);
 
   return (
-    <div>
+    <div style={{ minHeight: "100vh" }}>
       <Breadcrumbs
         sx={{ my: 0, ml: 5, py: 0 }}
         separator={<NavigateNextIcon fontSize="small" />}

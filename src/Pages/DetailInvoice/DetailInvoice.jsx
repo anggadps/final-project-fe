@@ -15,7 +15,6 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 
-
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.secondary.main,
@@ -36,6 +35,41 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
+const formatDate = (inputDate) => {
+  const date = new Date(inputDate);
+
+  const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  const dayOfWeek = days[date.getDay()];
+  const dayOfMonth = date.getDate();
+  const month = months[date.getMonth()];
+  const year = date.getFullYear();
+
+  return `${dayOfWeek}, ${dayOfMonth} ${month} ${year}`;
+};
+
 const breadcrumbs = [
   <Typography key="1" color="text.inherit">
     Home
@@ -54,9 +88,10 @@ const DetailInvoice = () => {
   const { payload } = useAuth();
   axios.defaults.headers.common["Authorization"] = `Bearer ${payload.token}`;
 
-  const noInvoice = invoiceDetail.length > 0 ? invoiceDetail[0].no_invoice : '';
-  const payDate = invoiceDetail.length > 0 ? invoiceDetail[0].pay_date : '';
-  const totalPrice = invoiceDetail.length > 0 ? invoiceDetail[0].total_price : '';
+  const noInvoice = invoiceDetail.length > 0 ? invoiceDetail[0].no_invoice : "";
+  const payDate = invoiceDetail.length > 0 ? invoiceDetail[0].pay_date : "";
+  const totalPrice =
+    invoiceDetail.length > 0 ? invoiceDetail[0].total_price : "";
 
   useEffect(() => {
     axios
@@ -65,13 +100,12 @@ const DetailInvoice = () => {
         let no_urut = 1;
         const dataWithNoUrut = response.data.map((item) => ({
           ...item,
-          no: no_urut++, 
+          no: no_urut++,
         }));
         setInvoiceDetail(dataWithNoUrut);
       })
       .catch((error) => console.log(error));
   }, []);
-
 
   return (
     <div>
@@ -100,7 +134,7 @@ const DetailInvoice = () => {
         >
           <Box>
             <Typography>No. Invoice : {noInvoice} </Typography>
-            <Typography>Date : {payDate} </Typography>
+            <Typography>Date : {formatDate(payDate)} </Typography>
           </Box>
           <Typography
             variant="h6"
@@ -121,13 +155,21 @@ const DetailInvoice = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              <StyledTableRow>
-                <StyledTableCell align="center">No</StyledTableCell>
-                <StyledTableCell align="center">title</StyledTableCell>
-                <StyledTableCell align="center">type name</StyledTableCell>
-                <StyledTableCell align="center">date</StyledTableCell>
-                <StyledTableCell align="center">price</StyledTableCell>
-              </StyledTableRow>
+              {invoiceDetail.map((row) => (
+                <StyledTableRow>
+                  <StyledTableCell align="center">{row.no}</StyledTableCell>
+                  <StyledTableCell align="center">
+                    {row.course_name}
+                  </StyledTableCell>
+                  <StyledTableCell align="center">
+                    {row.category_name}
+                  </StyledTableCell>
+                  <StyledTableCell align="center">
+                    {formatDate(row.schedule_date)}
+                  </StyledTableCell>
+                  <StyledTableCell align="center">{row.price}</StyledTableCell>
+                </StyledTableRow>
+              ))}
             </TableBody>
           </Table>
         </TableContainer>

@@ -14,7 +14,6 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import PaymentModal from "../../components/PaymentModal";
 import useAuth from "../../hooks/useAuth";
@@ -146,7 +145,7 @@ const Cart = () => {
                     <Card sx={{ display: "flex", minWidth: 275 }}>
                       <CardMedia sx={{ flex: "0 0 100px" }}>
                         <img
-                          src={`https://localhost:7091/images/${item.image}`}
+                          src={`https://localhost:7091/images/${item.img}`}
                           alt="Header"
                           style={{ maxWidth: "100%", height: "auto" }}
                         />

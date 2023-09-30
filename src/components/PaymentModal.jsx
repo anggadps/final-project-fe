@@ -49,8 +49,7 @@ export default function BasicModal(props) {
     axios
       .post(process.env.REACT_APP_API_URL + `/Order`, createOrder)
       .then((response) => {
-        console.log(response.data);
-        navigate("/");
+        navigate("/success-purchase");
       })
       .catch((error) => console.log(error));
   };
