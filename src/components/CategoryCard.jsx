@@ -10,7 +10,7 @@ export default function MediaCard({ name, image, id }) {
       <CardActionArea href={`/menuclass/${id}`}>
         <CardMedia
           sx={{ height: 140, width:200 }}
-          image="http://via.placeholder.com/600"
+          image={`https://localhost:7091/images/${image}`}
           title={name}
         />
         <Typography

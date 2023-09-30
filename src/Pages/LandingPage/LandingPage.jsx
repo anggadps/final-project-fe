@@ -99,7 +99,7 @@ function LandingPage() {
               <Grid item xs={6} sm={4} md={3} key={item.id}>
                 <CategoryCard
                   name={item.name}
-                  image={item.image}
+                  image={item.img}
                   id={item.id}
                 />
               </Grid>
