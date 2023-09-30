@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Typography from "@mui/material/Typography";
-import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -10,7 +9,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Button } from "@mui/material";
 import Box from "@mui/material/Box";
 import ActionModal from "../../components/ActionModal";
 import ActionDelete from "../../components/ActionDelete";
@@ -46,20 +44,8 @@ function Course() {
         setCourse(response.data);
       })
       .catch((error) => console.log(error));
-
-    fetchCourseList();
   }, []);
 
-  const fetchCourseList = () => {
-    axios
-      .get(process.env.REACT_APP_API_URL + "/Course")
-      .then((response) => {
-        setCourse(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching course list:", error);
-      });
-  };
   return (
     <div>
       <TableContainer component={Paper}>
@@ -121,7 +107,7 @@ function Course() {
                   sx={{ display: "flex", gap: "20px", mx: "auto" }}
                 >
                   <ActionModal course={course} />
-                  <ActionDelete id={row.id} onCourseDeleted={fetchCourseList} />
+                  <ActionDelete id={row.id} />
                 </StyledTableCell>
               </StyledTableRow>
             ))}

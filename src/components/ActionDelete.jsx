@@ -8,7 +8,6 @@ function ActionDelete({ id }) {
       .delete(process.env.REACT_APP_API_URL + `/Course?id=${id}`)
       .then((response) => {
         // refresh the course list
-
         console.log("Course deleted successfully.");
       })
       .catch((error) => {
