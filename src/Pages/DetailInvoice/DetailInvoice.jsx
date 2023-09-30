@@ -1,3 +1,5 @@
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
@@ -10,6 +12,9 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import axios from "axios";
+import useAuth from "../../hooks/useAuth";
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -44,6 +49,26 @@ const breadcrumbs = [
 ];
 
 const DetailInvoice = () => {
+  const { id } = useParams();
+  const [invoiceDetail, setInvoiceDetail] = useState([]);
+  const { payload } = useAuth();
+  axios.defaults.headers.common["Authorization"] = `Bearer ${payload.token}`;
+
+  useEffect(() => {
+    axios
+      .get(process.env.REACT_APP_API_URL + `/Order/ViewInvoiceDetail?id=${id}`)
+      .then((response) => {
+        let no_urut = 1;
+        const dataWithNoUrut = response.data.map((item) => ({
+          ...item,
+          no: no_urut++, 
+        }));
+        setInvoiceDetail(dataWithNoUrut);
+        console.log(invoiceDetail);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
   return (
     <div>
       <Box sx={{ pt: 4, px: 10, mb: 20 }}>
@@ -70,8 +95,8 @@ const DetailInvoice = () => {
           }}
         >
           <Box>
-            <Typography>No. Invoice : </Typography>
-            <Typography>Date :</Typography>
+            <Typography>No. Invoice :  </Typography>
+            <Typography>Date : </Typography>
           </Box>
           <Typography
             variant="h6"

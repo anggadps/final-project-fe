@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
@@ -11,6 +12,8 @@ import Paper from "@mui/material/Paper";
 import { Button } from "@mui/material";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import useAuth from "../../hooks/useAuth";
+import axios from "axios";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -32,19 +35,21 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-// create dummy data for invoice
-function createData(no, no_invoice, date, total_course, total_price) {
-  return { no, no_invoice, date, total_course, total_price };
-}
 
-const rows = [
-  createData(1, "INV-0001", "2021-10-10", 2, 200000),
-  createData(2, "INV-0002", "2021-10-10", 2, 200000),
-  createData(3, "INV-0003", "2021-10-10", 2, 200000),
-  createData(4, "INV-0004", "2021-10-10", 2, 200000),
-  createData(5, "INV-0005", "2021-10-10", 2, 200000),
-  createData(6, "INV-0006", "2021-10-10", 2, 200000),
-];
+
+// // create dummy data for invoice
+// function createData(no, no_invoice, date, total_course, total_price) {
+//   return { no, no_invoice, date, total_course, total_price };
+// }
+
+// const rows = [
+//   createData(1, "INV-0001", "2021-10-10", 2, 200000),
+//   createData(2, "INV-0002", "2021-10-10", 2, 200000),
+//   createData(3, "INV-0003", "2021-10-10", 2, 200000),
+//   createData(4, "INV-0004", "2021-10-10", 2, 200000),
+//   createData(5, "INV-0005", "2021-10-10", 2, 200000),
+//   createData(6, "INV-0006", "2021-10-10", 2, 200000),
+// ];
 
 const breadcrumbs = [
   <Typography key="1" color="text.inherit">
@@ -91,6 +96,25 @@ const formatDate = (inputDate) => {
 };
 
 const Invoice = () => {
+  const [invoice, setInvoice] = useState([]);
+  const { payload } = useAuth();
+  axios.defaults.headers.common["Authorization"] = `Bearer ${payload.token}`;
+
+
+  useEffect(() => {
+    axios
+      .get(process.env.REACT_APP_API_URL + `/Order/ViewInvoice`)
+      .then((response) => {
+        let no_urut = 1;
+        const dataWithNoUrut = response.data.map((item) => ({
+          ...item,
+          no: no_urut++, 
+        }));
+        setInvoice(dataWithNoUrut);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
   return (
     <div>
       <Breadcrumbs
@@ -138,7 +162,7 @@ const Invoice = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
+              {invoice.map((row) => (
                 <StyledTableRow key={row.no}>
                   <StyledTableCell component="th" scope="row">
                     {row.no}
@@ -147,7 +171,7 @@ const Invoice = () => {
                     {row.no_invoice}
                   </StyledTableCell>
                   <StyledTableCell align="center">
-                    {formatDate(row.date)}
+                    {formatDate(row.pay_date)}
                   </StyledTableCell>
                   <StyledTableCell align="center">
                     {row.total_course}
@@ -157,7 +181,7 @@ const Invoice = () => {
                   </StyledTableCell>
                   <StyledTableCell align="center">
                     <Button
-                      href="/detail"
+                      href={`/detail-invoice/${row.id}`}
                       variant="contained"
                       sx={{ width: 170 }}
                     >

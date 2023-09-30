@@ -12,6 +12,11 @@ function Navbar() {
   const { isLoggedIn, logout } = useAuth();
   const navigate = useNavigate();
 
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
+
   return (
     <div>
       <nav>
@@ -33,10 +38,14 @@ function Navbar() {
                   My Class
                 </Link>
               </p>
-              <p>Invoice</p>
+              <p>
+                <Link reloadDocument to={`/invoice`}>
+                  Invoice
+                </Link>
+              </p>
               <p>|</p>
               <PersonIcon color="primary" />
-              <LogoutIcon onClick={() => logout()} color="secondary" />
+              <LogoutIcon onClick={handleLogout} color="secondary" />
             </>
           ) : (
             <>

@@ -63,7 +63,7 @@ function LandingPage() {
             {menuItems.map((item) => (
               <Grid item xs={12} sm={6} md={4} key={item.id}>
                 <Card
-                  category={item.category}
+                  category={item.category_name}
                   name={item.name}
                   price={item.price}
                   image={item.img}
