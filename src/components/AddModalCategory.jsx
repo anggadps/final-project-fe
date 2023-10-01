@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
-import axios from "axios";
+import axios from "axios"; // Import axios for making API requests
+import { FormControl } from "@mui/material";
 
 const style = {
   position: "absolute",
@@ -22,51 +22,35 @@ const style = {
   p: 4,
 };
 
-export default function EditCourseModal({ course, onClose }) {
+export default function AddModal({ onClose, onAdd }) {
   const [open, setOpen] = useState(false);
+
   const [data, setData] = useState({
     Name: "",
     Description: "",
-    Price: 0,
+    Img: "",
     ImageFile: null,
-    id_category: "",
   });
-  const [category, setCategory] = useState([]);
 
-  const getCategory = () => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/Category`)
-      .then((response) => {
-        setCategory(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
-  useEffect(() => {
-    getCategory();
-  }, []);
-
-  useEffect(() => {
-    setData({
-      Name: course.name,
-      Description: course.description,
-      Price: course.price,
-      id_category: course.id_category,
-    });
-  }, [course]);
+  //   get all category
 
   const handleSave = () => {
+    const formData = new FormData();
+    formData.append("Name", data.Name);
+    formData.append("Description", data.Description);
+    formData.append("ImageFile", data.ImageFile); // Append the image file
+
+    // Send a POST request to your server to add the Category data
     axios
-      .put(`${process.env.REACT_APP_API_URL}/Course?id=${course.id}`, data, {
+      .post(`${process.env.REACT_APP_API_URL}/Category`, formData, {
         headers: {
-          "Content-Type": "multipart/form-data",
+          "Content-Type": "multipart/form-data", // Set the correct content type for FormData
         },
       })
       .then((response) => {
         // Handle successful save
-        handleClose();
+        onAdd(response.data); // Notify the parent component that data has been added
+        handleClose(); // Close the modal
       })
       .catch((error) => {
         // Handle error
@@ -74,13 +58,34 @@ export default function EditCourseModal({ course, onClose }) {
       });
   };
 
+  // Handle input field changes
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setData({
+      ...data,
+      [name]: value,
+    });
+  };
+
+  //   handle for open and close modal
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    setData({
+      Name: "",
+      Price: "",
+      Description: "",
+      Img: "",
+      ImageFile: null,
+      id_category: "",
+    }); // Reset form fields when closing the modal
+  };
 
   return (
     <div>
-      <Button onClick={handleOpen} variant="contained" sx={{ width: 155 }}>
-        Edit
+      <Button onClick={handleOpen} variant="contained" sx={{ width: 175 }}>
+        Add Category
       </Button>
       <Modal
         open={open}
@@ -98,7 +103,7 @@ export default function EditCourseModal({ course, onClose }) {
             }}
           >
             <Typography id="modal-modal-title" variant="h6" component="h2">
-              Edit Course
+              Add Category
             </Typography>
           </Box>
 
@@ -110,56 +115,36 @@ export default function EditCourseModal({ course, onClose }) {
               gap: "1rem",
             }}
           >
+            {/* Add form fields for editing Category data */}
+
             <TextField
-              label="Course Name"
+              label="Category Name"
               variant="outlined"
               fullWidth
+              name="Name"
               value={data.Name}
-              onChange={(e) => setData({ ...data, Name: e.target.value })}
+              onChange={handleChange}
             />
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Category</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={data.id_category || ""}
-                onChange={(e) =>
-                  setData({ ...data, id_category: e.target.value })
-                }
-              >
-                {category.map((item) => (
-                  <MenuItem key={item.id} value={item.id}>
-                    {item.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+
             <TextField
               label="Description"
               variant="outlined"
               fullWidth
               multiline
               rows={4}
+              name="Description"
               value={data.Description}
-              onChange={(e) =>
-                setData({ ...data, Description: e.target.value })
-              }
+              onChange={handleChange}
             />
-            <TextField
-              label="Price"
-              variant="outlined"
-              fullWidth
-              type="number"
-              value={data.Price}
-              onChange={(e) =>
-                setData({ ...data, Price: parseFloat(e.target.value) })
-              }
-            />
+
             <input
               type="file"
               onChange={(e) => {
                 const file = e.target.files[0];
-                setData({ ...data, ImageFile: file });
+                setData({
+                  ...data,
+                  ImageFile: file,
+                });
               }}
             />
           </Box>

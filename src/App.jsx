@@ -20,6 +20,7 @@ import SuccessRegister from "./Pages/SuccessRegister/SuccessRegister";
 import Layout from "./admin/Layout/Layout";
 import Dashboard from "./admin/Dashboard/Dashboard";
 import Course from "./admin/Course/Course";
+import Category from "./admin/Category/Category";
 
 const theme = createTheme({
   typography: {
@@ -71,6 +72,7 @@ function App() {
           <Route path="/admin/*" element={<Layout />}>
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="course" element={<Course />} />
+            <Route path="category" element={<Category />} />
           </Route>
         </Routes>
       </ThemeProvider>

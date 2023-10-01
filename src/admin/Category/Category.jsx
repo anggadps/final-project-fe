@@ -10,8 +10,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
-import ActionModal from "../../components/ActionModal";
-import AddModal from "../../components/AddModal";
+import ActionModalCategory from "../../components/ActionModalCategory";
+import AddModalCategory from "../../components/AddModalCategory";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -33,20 +33,20 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function Course() {
-  const [course, setCourse] = useState([]);
+function Category() {
+  const [Category, setCategory] = useState([]);
 
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_API_URL + `/Course`)
+      .get(process.env.REACT_APP_API_URL + `/Category`)
       .then((response) => {
-        setCourse(response.data);
+        setCategory(response.data);
       })
       .catch((error) => console.log(error));
   }, []);
 
-  const addCourse = (newCourse) => {
-    setCourse([...course, newCourse]);
+  const addCategory = (newCategory) => {
+    setCategory([...Category, newCategory]);
   };
 
   return (
@@ -60,9 +60,9 @@ function Course() {
           }}
         >
           <Typography variant="h4" sx={{ py: 2 }}>
-            All Courses
+            All Categorys
           </Typography>
-          <AddModal onAdd={addCourse} />
+          <AddModalCategory onAdd={addCategory} />
         </Box>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
@@ -73,22 +73,18 @@ function Course() {
               <StyledTableCell align="center">
                 <Typography sx={{ fontWeight: "bold" }}>Name</Typography>
               </StyledTableCell>
-              <StyledTableCell align="center">
-                <Typography sx={{ fontWeight: "bold" }}>Category</Typography>
-              </StyledTableCell>
+
               <StyledTableCell align="center">
                 <Typography sx={{ fontWeight: "bold" }}>Description</Typography>
               </StyledTableCell>
-              <StyledTableCell align="center">
-                <Typography sx={{ fontWeight: "bold" }}>Price</Typography>
-              </StyledTableCell>
+
               <StyledTableCell align="center">
                 <Typography sx={{ fontWeight: "bold" }}>Action</Typography>
               </StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {course.map((row) => (
+            {Category.map((row) => (
               <StyledTableRow key={row.id}>
                 <StyledTableCell align="center">
                   <Box
@@ -98,15 +94,12 @@ function Course() {
                   />
                 </StyledTableCell>
                 <StyledTableCell align="center">{row.name}</StyledTableCell>
-                <StyledTableCell align="center">
-                  {row.category_name}
-                </StyledTableCell>
+
                 <StyledTableCell align="center">
                   {row.description}
                 </StyledTableCell>
-                <StyledTableCell align="center">{row.price}</StyledTableCell>
                 <StyledTableCell align="center">
-                  <ActionModal course={row} />
+                  <ActionModalCategory Category={row} />
                 </StyledTableCell>
               </StyledTableRow>
             ))}
@@ -117,4 +110,4 @@ function Course() {
   );
 }
 
-export default Course;
+export default Category;
