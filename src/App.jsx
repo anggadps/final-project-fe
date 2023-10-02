@@ -25,7 +25,8 @@ import Payment from "./admin/Payment/Payment";
 import InvoiceAdmin from "./admin/Invoice/Invoice";
 import DetailInvoiceAdmin from "./admin/DetailInvoice/DetailInvoice";
 import UserAdmin from "./admin/User/User";
-import useAuth from "./hooks/useAuth";
+import LoginAdmin from "./admin/LoginAdmin/LoginAdmin";
+
 
 
 const theme = createTheme({
@@ -73,9 +74,11 @@ function App() {
           </Routes>
           {!isAdminRoute && <Footer />}
         </AuthProvider>
+        
 
         <Routes>
           <Route path="/admin/*" element={<Layout />}>
+          <Route path="login" element={<LoginAdmin />} />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="course" element={<Course />} />
             <Route path="category" element={<Category />} />

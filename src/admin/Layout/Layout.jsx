@@ -149,6 +149,7 @@ export default function PersistentDrawerLeft() {
           )}
         </List>
         <Divider />
+        <Button>Logout</Button>
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
