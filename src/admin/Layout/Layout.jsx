@@ -123,7 +123,7 @@ export default function PersistentDrawerLeft() {
         </DrawerHeader>
         <Divider />
         <List sx={{ gap: "1rem", display: "flex", flexDirection: "column" }}>
-          {["Course", "Category", "Payment Method", "Invoice", "Users"].map(
+          {["Course", "Category", "Payment", "Invoice", "User"].map(
             (text) => (
               <Button
                 variant="contained"

@@ -21,6 +21,12 @@ import Layout from "./admin/Layout/Layout";
 import Dashboard from "./admin/Dashboard/Dashboard";
 import Course from "./admin/Course/Course";
 import Category from "./admin/Category/Category";
+import Payment from "./admin/Payment/Payment";
+import InvoiceAdmin from "./admin/Invoice/Invoice";
+import DetailInvoiceAdmin from "./admin/DetailInvoice/DetailInvoice";
+import UserAdmin from "./admin/User/User";
+import useAuth from "./hooks/useAuth";
+
 
 const theme = createTheme({
   typography: {
@@ -73,6 +79,11 @@ function App() {
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="course" element={<Course />} />
             <Route path="category" element={<Category />} />
+            <Route path="payment" element={<Payment />} />
+            <Route path="invoice" element={<InvoiceAdmin />} />
+            <Route path="detail-invoice/:id" element={<DetailInvoiceAdmin />} />
+            <Route path="user" element={<UserAdmin />} />
+
           </Route>
         </Routes>
       </ThemeProvider>

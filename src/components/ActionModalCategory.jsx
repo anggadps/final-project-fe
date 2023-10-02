@@ -28,12 +28,14 @@ export default function EditCategoryModal({ Category, onClose }) {
     Name: "",
     Description: "",
     ImageFile: null,
+    Is_active: "",
   });
 
   useEffect(() => {
     setData({
       Name: Category.name,
       Description: Category.description,
+      Is_active: Category.is_active,
     });
   }, [Category]);
 
@@ -121,6 +123,21 @@ export default function EditCategoryModal({ Category, onClose }) {
                 setData({ ...data, ImageFile: file });
               }}
             />
+
+            <FormControl variant="outlined" fullWidth>
+              <InputLabel id="is-active-label">Status</InputLabel>
+              <Select
+                labelId="is-active-label"
+                id="is-active-select"
+                value={data.Is_active}
+                onChange={(e) => setData({ ...data, Is_active: e.target.value })}
+                label="Description"
+              >
+                <MenuItem value={true}>Active</MenuItem>
+                <MenuItem value={false}>Inactive</MenuItem>
+              </Select>
+            </FormControl>
+
           </Box>
 
           <Box

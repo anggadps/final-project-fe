@@ -49,6 +49,14 @@ function Course() {
     setCourse([...course, newCourse]);
   };
 
+  const getStatusStyle = (isActive) => {
+    if (isActive) {
+      return { color: "green" }; // Active 
+    } else {
+      return { color: "red" }; // Inactive 
+    }
+  };
+
   return (
     <div>
       <TableContainer component={Paper}>
@@ -83,6 +91,9 @@ function Course() {
                 <Typography sx={{ fontWeight: "bold" }}>Price</Typography>
               </StyledTableCell>
               <StyledTableCell align="center">
+                <Typography sx={{ fontWeight: "bold" }}>Status</Typography>
+              </StyledTableCell>
+              <StyledTableCell align="center">
                 <Typography sx={{ fontWeight: "bold" }}>Action</Typography>
               </StyledTableCell>
             </TableRow>
@@ -105,6 +116,16 @@ function Course() {
                   {row.description}
                 </StyledTableCell>
                 <StyledTableCell align="center">{row.price}</StyledTableCell>
+                <StyledTableCell align="center">
+                  <Typography
+                    sx={{
+                      fontWeight: "bold",
+                      ...getStatusStyle(row.is_active),
+                    }}
+                  >
+                    {row.is_active ? "Active" : "Inactive"}
+                  </Typography>
+                </StyledTableCell>
                 <StyledTableCell align="center">
                   <ActionModal course={row} />
                 </StyledTableCell>

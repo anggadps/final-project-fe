@@ -23,15 +23,15 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
 }));
 
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(even)": {
-    backgroundColor: theme.palette.grey[300],
-  },
-  // hide last border
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
-}));
+
+
+const getStatusStyle = (isActive) => {
+  if (isActive) {
+    return { color: "green" }; // Active 
+  } else {
+    return { color: "red" }; // Inactive 
+  }
+};
 
 function Category() {
   const [Category, setCategory] = useState([]);
@@ -48,6 +48,16 @@ function Category() {
   const addCategory = (newCategory) => {
     setCategory([...Category, newCategory]);
   };
+
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    "&:nth-of-type(even)": {
+      backgroundColor: theme.palette.grey[300],
+    },
+    // hide last border
+    "&:last-child td, &:last-child th": {
+      border: 0,
+    },
+  }));
 
   return (
     <div>
@@ -79,8 +89,13 @@ function Category() {
               </StyledTableCell>
 
               <StyledTableCell align="center">
+                <Typography sx={{ fontWeight: "bold" }}>Status</Typography>
+              </StyledTableCell>
+
+              <StyledTableCell align="center">
                 <Typography sx={{ fontWeight: "bold" }}>Action</Typography>
               </StyledTableCell>
+
             </TableRow>
           </TableHead>
           <TableBody>
@@ -98,6 +113,18 @@ function Category() {
                 <StyledTableCell align="center">
                   {row.description}
                 </StyledTableCell>
+
+                <StyledTableCell align="center">
+                  <Typography
+                    sx={{
+                      fontWeight: "bold",
+                      ...getStatusStyle(row.is_active),
+                    }}
+                  >
+                    {row.is_active ? "Active" : "Inactive"}
+                  </Typography>
+                </StyledTableCell>
+
                 <StyledTableCell align="center">
                   <ActionModalCategory Category={row} />
                 </StyledTableCell>

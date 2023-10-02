@@ -22,50 +22,32 @@ const style = {
   p: 4,
 };
 
-export default function EditCourseModal({ course, onClose }) {
+export default function EditPaymentModal({ Payment, onClose }) {
   const [open, setOpen] = useState(false);
   const [data, setData] = useState({
     Name: "",
-    Description: "",
-    Price: 0,
-    ImageFile: null,
-    id_category: "",
     Is_active: "",
+    ImageFile: null,
   });
-  const [category, setCategory] = useState([]);
-
-  const getCategory = () => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/Category`)
-      .then((response) => {
-        setCategory(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
-  useEffect(() => {
-    getCategory();
-  }, []);
 
   useEffect(() => {
     setData({
-      Name: course.name,
-      Description: course.description,
-      Price: course.price,
-      id_category: course.id_category,
-      Is_active: course.is_active,
+      Name: Payment.name,
+      Is_active: Payment.is_active,
     });
-  }, [course]);
+  }, [Payment]);
 
   const handleSave = () => {
     axios
-      .put(`${process.env.REACT_APP_API_URL}/Course?id=${course.id}`, data, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+      .put(
+        `${process.env.REACT_APP_API_URL}/Payment?id=${Payment.id}`,
+        data,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
       .then((response) => {
         // Handle successful save
         handleClose();
@@ -100,7 +82,7 @@ export default function EditCourseModal({ course, onClose }) {
             }}
           >
             <Typography id="modal-modal-title" variant="h6" component="h2">
-              Edit Course
+              Edit Payment Method
             </Typography>
           </Box>
 
@@ -113,50 +95,27 @@ export default function EditCourseModal({ course, onClose }) {
             }}
           >
             <TextField
-              label="Course Name"
+              label="Payment Method Name"
               variant="outlined"
               fullWidth
               value={data.Name}
               onChange={(e) => setData({ ...data, Name: e.target.value })}
             />
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Category</InputLabel>
+
+            <FormControl variant="outlined" fullWidth>
+              <InputLabel id="is-active-label">Status</InputLabel>
               <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={data.id_category || ""}
-                onChange={(e) =>
-                  setData({ ...data, id_category: e.target.value })
-                }
+                labelId="is-active-label"
+                id="is-active-select"
+                value={data.Is_active}
+                onChange={(e) => setData({ ...data, Is_active: e.target.value })}
+                label="Description"
               >
-                {category.map((item) => (
-                  <MenuItem key={item.id} value={item.id}>
-                    {item.name}
-                  </MenuItem>
-                ))}
+                <MenuItem value={true}>Active</MenuItem>
+                <MenuItem value={false}>Inactive</MenuItem>
               </Select>
             </FormControl>
-            <TextField
-              label="Description"
-              variant="outlined"
-              fullWidth
-              multiline
-              rows={4}
-              value={data.Description}
-              onChange={(e) =>
-                setData({ ...data, Description: e.target.value })
-              }
-            />
-            <TextField
-              label="Price"
-              variant="outlined"
-              fullWidth
-              type="number"
-              value={data.Price}
-              onChange={(e) =>
-                setData({ ...data, Price: parseFloat(e.target.value) })
-              }
-            />
+
             <input
               type="file"
               onChange={(e) => {
@@ -164,19 +123,6 @@ export default function EditCourseModal({ course, onClose }) {
                 setData({ ...data, ImageFile: file });
               }}
             />
-            <FormControl variant="outlined" fullWidth>
-                            <InputLabel id="is-active-label">Status</InputLabel>
-                            <Select
-                                labelId="is-active-label"
-                                id="is-active-select"
-                                value={data.Is_active}
-                                onChange={(e) => setData({ ...data, Is_active: e.target.value })}
-                                label="Description"
-                            >
-                                <MenuItem value={true}>Active</MenuItem>
-                                <MenuItem value={false}>Inactive</MenuItem>
-                            </Select>
-                        </FormControl>
           </Box>
 
           <Box
