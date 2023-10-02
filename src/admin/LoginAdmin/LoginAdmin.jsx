@@ -31,7 +31,7 @@ const LoginAdmin = () => {
         const decode = tokenDecode(response.data.token); 
         if(decode.role === "admin"){
           console.log(decode.role)
-          login(response.data)
+          // login(response.data) 
           // navigate("/admin/dashboard"); 
         } else {
           console.log("Please login with User Admin!")
