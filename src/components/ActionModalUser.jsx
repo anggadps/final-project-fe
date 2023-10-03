@@ -68,6 +68,7 @@ export default function EditUserModal({ user, onClose }) {
             .then((response) => {
                 // Handle successful save
                 handleClose();
+                window.location.reload();
             })
             .catch((error) => {
                 // Handle error

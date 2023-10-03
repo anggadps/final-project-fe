@@ -38,7 +38,7 @@ function Course() {
 
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_API_URL + `/Course`)
+      .get(process.env.REACT_APP_API_URL + `/Course/GetAllByAdmin`)
       .then((response) => {
         setCourse(response.data);
       })
@@ -68,7 +68,7 @@ function Course() {
           }}
         >
           <Typography variant="h4" sx={{ py: 2 }}>
-            All Courses
+            All Data Courses
           </Typography>
           <AddModal onAdd={addCourse} />
         </Box>

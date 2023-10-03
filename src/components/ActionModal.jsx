@@ -36,7 +36,7 @@ export default function EditCourseModal({ course, onClose }) {
 
   const getCategory = () => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/Category`)
+      .get(`${process.env.REACT_APP_API_URL}/Category/GetAllByAdmin`)
       .then((response) => {
         setCategory(response.data);
       })
@@ -69,6 +69,7 @@ export default function EditCourseModal({ course, onClose }) {
       .then((response) => {
         // Handle successful save
         handleClose();
+        window.location.reload();
       })
       .catch((error) => {
         // Handle error

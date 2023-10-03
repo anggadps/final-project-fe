@@ -53,6 +53,7 @@ export default function EditCategoryModal({ Category, onClose }) {
       .then((response) => {
         // Handle successful save
         handleClose();
+        window.location.reload();
       })
       .catch((error) => {
         // Handle error

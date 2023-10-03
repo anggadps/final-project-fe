@@ -19,7 +19,7 @@ const LoginAdmin = () => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
-  const { login } = useAuth();
+  // const { login } = useAuth();
   const onSubmit = (e) => {
     e.preventDefault();
     axios
@@ -31,6 +31,7 @@ const LoginAdmin = () => {
         const decode = tokenDecode(response.data.token); 
         if(decode.role === "admin"){
           console.log(decode.role)
+          console.log("Success Login!")
           // login(response.data) 
           // navigate("/admin/dashboard"); 
         } else {

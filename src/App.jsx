@@ -73,7 +73,7 @@ function App() {
             <Route path="/success-register" element={<SuccessRegister />} />
           </Routes>
           {!isAdminRoute && <Footer />}
-        </AuthProvider>
+        
         
 
         <Routes>
@@ -89,6 +89,7 @@ function App() {
 
           </Route>
         </Routes>
+        </AuthProvider>
       </ThemeProvider>
     </>
   );

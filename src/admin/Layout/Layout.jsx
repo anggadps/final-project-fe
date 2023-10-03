@@ -20,6 +20,10 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import { Link, Outlet } from "react-router-dom";
 import { Button } from "@mui/material";
+import useAuth from "../../hooks/useAuth";
+import tokenDecode from "jwt-decode";
+import AccessDenied from "../../components/AccessDenied";
+
 
 const drawerWidth = 240;
 
@@ -71,6 +75,23 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 export default function PersistentDrawerLeft() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const { payload } = useAuth();
+
+  // mendapatkan rolesnya
+  let userRoles = null;
+  const decode = () => {
+    if (payload !== null) {
+      userRoles = tokenDecode(payload.token)
+      return userRoles
+    } else {
+      return { role: "unknow" }
+    }
+  }
+
+  if (decode().role !== "admin") {
+    return <AccessDenied />;
+  }
+
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -149,7 +170,6 @@ export default function PersistentDrawerLeft() {
           )}
         </List>
         <Divider />
-        <Button>Logout</Button>
       </Drawer>
       <Main open={open}>
         <DrawerHeader />

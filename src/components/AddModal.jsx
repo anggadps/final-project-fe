@@ -27,7 +27,7 @@ export default function AddModal({ onClose, onAdd }) {
   const [category, setCategory] = useState([]);
   const getCategory = () => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/Category`)
+      .get(`${process.env.REACT_APP_API_URL}/Category/GetAllByAdmin`)
       .then((response) => {
         setCategory(response.data);
       })
@@ -44,7 +44,7 @@ export default function AddModal({ onClose, onAdd }) {
     Description: "",
     Img: "",
     ImageFile: null,
-    id_category: category.id,
+    id_category: "",
   });
 
   //   get all category
@@ -68,6 +68,7 @@ export default function AddModal({ onClose, onAdd }) {
         // Handle successful save
         onAdd(response.data); // Notify the parent component that data has been added
         handleClose(); // Close the modal
+        window.location.reload();
       })
       .catch((error) => {
         // Handle error
@@ -149,7 +150,7 @@ export default function AddModal({ onClose, onAdd }) {
                 id="demo-simple-select"
                 value={data.id_category || ""}
                 label="Category"
-                onChange={(e) => setData({ id_category: e.target.value })}
+                onChange={(e) => setData({ ...data, id_category: e.target.value })}
               >
                 {category.map((item) => {
                   return (

@@ -51,6 +51,7 @@ export default function EditPaymentModal({ Payment, onClose }) {
       .then((response) => {
         // Handle successful save
         handleClose();
+        window.location.reload();
       })
       .catch((error) => {
         // Handle error

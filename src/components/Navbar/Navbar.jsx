@@ -9,9 +9,10 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PersonIcon from "@mui/icons-material/Person";
 import LogoutIcon from "@mui/icons-material/Logout";
 import MenuIcon from "@mui/icons-material/Menu";
+import tokenDecode from "jwt-decode";
 
 function Navbar() {
-  const { isLoggedIn, logout } = useAuth();
+  const { isLoggedIn, logout, payload } = useAuth();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const navigate = useNavigate();
@@ -24,10 +25,29 @@ function Navbar() {
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
+
   const cartClick = () => {
     navigate("/cart");
     toggleDrawer();
   };
+
+  const adminClick = () => {
+    navigate("/admin");
+    toggleDrawer();
+  };
+
+  // mendapatkan rolesnya
+  let userRoles = null;
+  console.log(userRoles)
+  const decode = () => {
+    if (payload !== null) {
+      userRoles = tokenDecode(payload.token)
+      return userRoles
+    } else {
+      return { role: "unknow" }
+    }
+  }
+
 
   return (
     <div>
@@ -74,8 +94,8 @@ function Navbar() {
                       cursor="pointer"
                     />
                   </li>
-                  <li onClick={toggleDrawer}>
-                    <PersonIcon color="primary" />
+                  <li onClick={adminClick}>
+                      <PersonIcon color="primary" />
                   </li>
                   <li onClick={handleLogout}>
                     <LogoutIcon cursor="pointer" color="secondary" />
@@ -130,7 +150,13 @@ function Navbar() {
                 </Link>
               </p>
               <p>|</p>
-              <PersonIcon color="primary" />
+
+
+              {decode().role === "admin" && (
+                <PersonIcon onClick={adminClick} cursor="pointer" color="primary" />
+              )}
+
+
               <LogoutIcon
                 onClick={handleLogout}
                 cursor="pointer"

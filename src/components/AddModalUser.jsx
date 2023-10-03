@@ -67,6 +67,7 @@ export default function AddModal({ onClose, onAdd }) {
                 // Handle successful save
                 onAdd(response.data); // Notify the parent component that data has been added
                 handleClose(); // Close the modal
+                window.location.reload();
             })
             .catch((error) => {
                 // Handle error

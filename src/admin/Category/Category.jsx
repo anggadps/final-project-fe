@@ -38,7 +38,7 @@ function Category() {
 
   useEffect(() => {
     axios
-      .get(process.env.REACT_APP_API_URL + `/Category`)
+      .get(process.env.REACT_APP_API_URL + `/Category/GetAllByAdmin`)
       .then((response) => {
         setCategory(response.data);
       })
@@ -70,7 +70,7 @@ function Category() {
           }}
         >
           <Typography variant="h4" sx={{ py: 2 }}>
-            All Categorys
+            All Data Categories
           </Typography>
           <AddModalCategory onAdd={addCategory} />
         </Box>

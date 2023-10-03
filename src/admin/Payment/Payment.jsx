@@ -40,7 +40,7 @@ const Payment = () => {
 
     useEffect(() => {
         axios
-            .get(process.env.REACT_APP_API_URL + `/Payment`)
+            .get(process.env.REACT_APP_API_URL + `/Payment/GetAllByAdmin`)
             .then((response) => {
                 setPayment(response.data);
             })
