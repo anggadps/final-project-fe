@@ -29,10 +29,10 @@ const AccessDenied = () => {
           Access Denied
         </Typography>
         <Typography variant="body1" paragraph>
-          Anda tidak memiliki izin untuk mengakses halaman admin.
+        You do not have permission to access the admin page.
         </Typography>
         <Button variant="contained" color="primary" href="/">
-          Kembali ke Halaman Utama
+          Return to Home Page
         </Button>
       </Grid>
     </Grid>
