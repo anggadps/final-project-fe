@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Grid, Typography, Button, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -15,14 +15,18 @@ const SuccessRegister = () => {
   const idUser = getParameterValue(url, "userId");
   const email = getParameterValue(url, "email");
 
-  axios
-    .get(
-      `${process.env.REACT_APP_API_URL}/User/ActivateUser?userId=${idUser}&email=${email}`
-    )
-    .then((res) => console.log(res.status))
-    .catch((error) => {
-      console.error(error.response);
-    });
+
+
+  useEffect(() => {
+    axios
+      .get(
+        `${process.env.REACT_APP_API_URL}/User/ActivateUser?userId=${idUser}&email=${email}`
+      )
+      .then((res) => console.log(res.status))
+      .catch((error) => {
+        console.error(error.response);
+      });
+  }, [])
 
   return (
     <div>

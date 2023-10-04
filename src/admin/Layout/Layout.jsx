@@ -12,7 +12,6 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import HomeIcon from "@mui/icons-material/Home"; // Import ikon Home
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -24,6 +23,8 @@ import { Button } from "@mui/material";
 import useAuth from "../../hooks/useAuth";
 import tokenDecode from "jwt-decode";
 import AccessDenied from "../../components/AccessDenied";
+import HomeIcon from "@mui/icons-material/Home";
+
 
 const drawerWidth = 240;
 
@@ -69,7 +70,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 1),
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
-  justifyContent: "space-between",
+  justifyContent: "flex-end",
 }));
 
 export default function PersistentDrawerLeft() {
@@ -78,16 +79,21 @@ export default function PersistentDrawerLeft() {
   const { payload } = useAuth();
   const navigate = useNavigate();
 
-  // Mendapatkan rolesnya
+  // mendapatkan rolesnya
   let userRoles = null;
   const decode = () => {
     if (payload !== null) {
-      userRoles = tokenDecode(payload.token);
-      return userRoles;
+      userRoles = tokenDecode(payload.token)
+      return userRoles
     } else {
-      return { role: "unknown" };
+      return { role: "unknow" }
     }
-  };
+  }
+
+  if (decode().role !== "admin") {
+    return <AccessDenied />;
+  }
+
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -100,10 +106,6 @@ export default function PersistentDrawerLeft() {
   const handleHomepageClick = () => {
     navigate("/");
   };
-
-  if (decode().role !== "admin") {
-    return <AccessDenied />;
-  }
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -151,37 +153,40 @@ export default function PersistentDrawerLeft() {
             sx={{ margin: "0.5rem" }}
             onClick={handleHomepageClick}
           >
-            <HomeIcon /> {/* Menggunakan ikon Home */}
+            <HomeIcon />
           </Button>
         </DrawerHeader>
         <Divider />
         <List sx={{ gap: "1rem", display: "flex", flexDirection: "column" }}>
-          {["Course", "Category", "Payment", "Invoice", "User"].map((text) => (
-            <Button
-              variant="contained"
-              color="secondary"
-              key={text}
-              sx={{ mx: 2 }}
-            >
-              <Link
-                to={text}
-                children
-                style={{
-                  textDecoration: "none",
-                  color: "inherit",
-                  width: "100%",
-                }}
+          {["Course", "Category", "Payment", "Invoice", "User"].map(
+            (text) => (
+              <Button
+                variant="contained"
+                color="secondary"
+                key={text}
+                sx={{ mx: 2 }}
               >
-                <ListItem>
-                  <ListItemText primary={text} />
-                </ListItem>
-              </Link>
-            </Button>
-          ))}
+                <Link
+                  to={text}
+                  children
+                  style={{
+                    textDecoration: "none",
+                    color: "inherit",
+                    width: "100%",
+                  }}
+                >
+                  <ListItem>
+                    <ListItemText primary={text} />
+                  </ListItem>
+                </Link>
+              </Button>
+            )
+          )}
         </List>
         <Divider />
       </Drawer>
       <Main open={open}>
+        <DrawerHeader />
         <Outlet />
       </Main>
     </Box>
