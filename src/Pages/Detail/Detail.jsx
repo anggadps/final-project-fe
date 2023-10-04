@@ -20,7 +20,7 @@ const Detail = () => {
   const [dataSchedule, setDataSchedule] = useState([]);
   const [selectedScheduleId, setSelectedScheduleId] = useState(null);
   const { payload } = useAuth();
-  axios.defaults.headers.common["Authorization"] = `Bearer ${payload.token}`;
+  
 
   const formatDate = (inputDate) => {
     const date = new Date(inputDate);
@@ -58,6 +58,7 @@ const Detail = () => {
   };
 
   const addCart = (e) => {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${payload.token}`;
     axios
       .post(process.env.REACT_APP_API_URL + `/Cart/AddCart`, {
         id_user: payload.id,
