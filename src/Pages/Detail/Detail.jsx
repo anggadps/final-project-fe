@@ -9,6 +9,9 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Card from "../../components/MenuCard";
 import useAuth from "../../hooks/useAuth";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from '@mui/material/Alert';
+
 
 const Detail = () => {
   const navigate = useNavigate();
@@ -20,7 +23,9 @@ const Detail = () => {
   const [dataSchedule, setDataSchedule] = useState([]);
   const [selectedScheduleId, setSelectedScheduleId] = useState(null);
   const { payload } = useAuth();
-  
+  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+
 
   const formatDate = (inputDate) => {
     const date = new Date(inputDate);
@@ -67,6 +72,22 @@ const Detail = () => {
       })
       .then((response) => {
         console.log(response.data);
+        setSnackbarMessage("Successfully put into cart.");
+        setIsSnackbarOpen(true);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const buyNow = (e) => {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${payload.token}`;
+    axios
+      .post(process.env.REACT_APP_API_URL + `/Cart/AddCart`, {
+        id_user: payload.id,
+        id_course: id,
+        id_schedule: selectedScheduleId,
+      })
+      .then((response) => {
+        console.log(response.data);
         navigate("/cart");
       })
       .catch((error) => console.log(error));
@@ -98,7 +119,7 @@ const Detail = () => {
       axios
         .get(
           process.env.REACT_APP_API_URL +
-            `/Category/GetById?id=${dataIdCategory}`
+          `/Category/GetById?id=${dataIdCategory}`
         )
         .then((response) => {
           setDataCategory(response.data);
@@ -108,7 +129,7 @@ const Detail = () => {
       axios
         .get(
           process.env.REACT_APP_API_URL +
-            `/Course/GetByIdCategory?id=${dataIdCategory}`
+          `/Course/GetByIdCategory?id=${dataIdCategory}`
         )
         .then((response) => {
           setMenuItems(response.data);
@@ -116,6 +137,10 @@ const Detail = () => {
         .catch((error) => console.log(error));
     }
   }, [dataIdCategory]);
+
+  const isPayloadTokenEmpty = !payload || !payload.token;
+
+  console.log("Payload:", isPayloadTokenEmpty);
 
   return (
     <div>
@@ -191,21 +216,41 @@ const Detail = () => {
           </FormControl>
 
           <Box>
-            <Button
-              variant="outlined"
-              sx={{ width: 175, py: 1, px: 6 }}
-              color="secondary"
-              href=""
-              onClick={() => addCart()}
-            >
-              Add Cart
-            </Button>
-            <Button
-              variant="contained"
-              sx={{ ml: 4, width: 175, py: 1, px: 6 }}
-            >
-              Buy Now
-            </Button>
+            {isPayloadTokenEmpty ? (
+              <Typography variant="subtitle1" color="error">
+                For order this course, you must login first.
+              </Typography>
+            ) : (
+              <>
+                <Button
+                  variant="outlined"
+                  sx={{ width: 175, py: 1, px: 6 }}
+                  color="secondary"
+                  href=""
+                  onClick={() => addCart()}
+                  disabled={isPayloadTokenEmpty || selectedScheduleId === null}
+                >
+                  Add Cart
+                </Button>
+                <Button
+                  variant="contained"
+                  sx={{ ml: 4, width: 175, py: 1, px: 6 }}
+                  onClick={() => buyNow()}
+                  disabled={isPayloadTokenEmpty || selectedScheduleId === null}
+                >
+                  Buy Now
+                </Button>
+                <Snackbar
+                  open={isSnackbarOpen}
+                  autoHideDuration={3000} // Durasi tampilan snackbar (dalam milidetik)
+                  onClose={() => setIsSnackbarOpen(false)}
+                >
+                  <Alert severity="success" sx={{ width: '100%' }}>
+                    {snackbarMessage}
+                  </Alert>
+                </Snackbar>
+              </>
+            )}
           </Box>
         </Box>
 
