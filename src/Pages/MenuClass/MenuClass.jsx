@@ -30,7 +30,7 @@ const MenuClass = () => {
     <div>
       <section className="menu-class">
         <div className="header-bg">
-          <img src={`https://localhost:7091/images/${data.img}`} alt="Header" />
+          <img src={process.env.REACT_APP_IMG_URL + `${data.img}`} alt="Header" />
         </div>
       </section>
       <section className="description">

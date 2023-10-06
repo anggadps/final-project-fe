@@ -171,7 +171,7 @@ const Detail = () => {
               objectFit: "cover",
             }}
             alt="placeholder"
-            src={`https://localhost:7091/images/${data.img}`}
+            src={process.env.REACT_APP_IMG_URL + `${data.img}`}
           />
         </Box>
 

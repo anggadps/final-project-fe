@@ -12,7 +12,7 @@ export default function MediaCard({ category, name, price, image, id }) {
       <CardActionArea href={`/detail/${id}`}>
         <CardMedia
           sx={{ height: 140, }}
-          image={`https://localhost:7091/images/${image}`}
+          image={process.env.REACT_APP_IMG_URL + `${image}`}
           title={name}
         />
         <CardContent>

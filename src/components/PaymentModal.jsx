@@ -109,7 +109,7 @@ export default function BasicModal(props) {
                     <Box
                       component="img"
                       sx={{ height: 60, width: 60 }}
-                      src={`https://localhost:7091/images/${item.logo}`}
+                      src={process.env.REACT_APP_IMG_URL + `${item.logo}`}
                     />
                     <ListItemText sx={{ px: 2 }} primary={item.name} />
                   </ListItemButton>

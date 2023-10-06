@@ -105,7 +105,7 @@ function Category() {
                   <Box
                     component="img"
                     sx={{ height: 60, width: 60 }}
-                    src={`https://localhost:7091/images/${row.img}`}
+                    src={process.env.REACT_APP_IMG_URL + `${row.img}`}
                   />
                 </StyledTableCell>
                 <StyledTableCell align="center">{row.name}</StyledTableCell>

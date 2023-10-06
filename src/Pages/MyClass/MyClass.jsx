@@ -65,7 +65,7 @@ const MyClass = () => {
           <Box
             component="img"
             sx={{ height: "140px" }}
-            src={`https://localhost:7091/images/${list.img}`}
+            src={process.env.REACT_APP_IMG_URL + `${list.img}`}
           />
           <Box sx={{ px: 3 }}>
             <Typography sx={{ pb: 1 }}>{list.category_name}</Typography>

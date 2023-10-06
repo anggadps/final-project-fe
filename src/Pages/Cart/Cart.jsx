@@ -145,7 +145,7 @@ const Cart = () => {
                     <Card sx={{ display: "flex", minWidth: 275 }}>
                       <CardMedia sx={{ flex: "0 0 100px" }}>
                         <img
-                          src={`https://localhost:7091/images/${item.img}`}
+                          src={process.env.REACT_APP_IMG_URL +`${item.img}`}
                           alt="Header"
                           style={{ maxWidth: "100%", height: "auto" }}
                         />

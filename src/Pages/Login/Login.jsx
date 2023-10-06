@@ -60,7 +60,7 @@ function Login() {
         .catch((error) => {
           if (error.response) {
             // Server responded with an error (e.g., 401 Unauthorized)
-            setAlert({ ...alert, open: true, message: "Login failed." });
+            setAlert({ ...alert, open: true, message: "Invalid credentials." });
           } else {
             // Network error or other issues
             setAlert({

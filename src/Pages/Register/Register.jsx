@@ -13,6 +13,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 function Register() {
   const navigate = useNavigate();
+  const [successModalOpen, setSuccessModalOpen] = useState(false);
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -75,12 +76,16 @@ function Register() {
           email: data.email,
         })
         .then((response) => {
-          setAlert({ ...alert, open: true });
+          // setAlert({ ...alert, open: true, message: "Your account has been successfully registered. Please check your email address for activation instructions." });
+          setSuccessModalOpen(true);
+          console.log("Success Register", successModalOpen)
         })
         .catch((error) => console.log(error));
-      navigate("/login");
+      //navigate("/login");
     }
   };
+
+
 
   return (
     <div>
