@@ -10,8 +10,7 @@ import InputLabel from "@mui/material/InputLabel";
 import Card from "../../components/MenuCard";
 import useAuth from "../../hooks/useAuth";
 import Snackbar from "@mui/material/Snackbar";
-import Alert from '@mui/material/Alert';
-
+import Alert from "@mui/material/Alert";
 
 const Detail = () => {
   const navigate = useNavigate();
@@ -25,7 +24,6 @@ const Detail = () => {
   const { payload } = useAuth();
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
-
 
   const formatDate = (inputDate) => {
     const date = new Date(inputDate);
@@ -74,6 +72,7 @@ const Detail = () => {
         console.log(response.data);
         setSnackbarMessage("Successfully put into cart.");
         setIsSnackbarOpen(true);
+        navigate("/cart");
       })
       .catch((error) => console.log(error));
   };
@@ -119,7 +118,7 @@ const Detail = () => {
       axios
         .get(
           process.env.REACT_APP_API_URL +
-          `/Category/GetById?id=${dataIdCategory}`
+            `/Category/GetById?id=${dataIdCategory}`
         )
         .then((response) => {
           setDataCategory(response.data);
@@ -129,7 +128,7 @@ const Detail = () => {
       axios
         .get(
           process.env.REACT_APP_API_URL +
-          `/Course/GetByIdCategory?id=${dataIdCategory}`
+            `/Course/GetByIdCategory?id=${dataIdCategory}`
         )
         .then((response) => {
           setMenuItems(response.data);
@@ -245,7 +244,7 @@ const Detail = () => {
                   autoHideDuration={3000} // Durasi tampilan snackbar (dalam milidetik)
                   onClose={() => setIsSnackbarOpen(false)}
                 >
-                  <Alert severity="success" sx={{ width: '100%' }}>
+                  <Alert severity="success" sx={{ width: "100%" }}>
                     {snackbarMessage}
                   </Alert>
                 </Snackbar>

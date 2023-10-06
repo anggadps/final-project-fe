@@ -22,6 +22,7 @@ const Cart = () => {
   const [course, setCourse] = useState([]);
   const [isCheckCart, setIsCheckCart] = useState([]);
   const [paymentModalOpen, setPaymentModalOpen] = useState(false);
+  const [selectAll, setSelectAll] = useState(false);
   const { payload } = useAuth();
   axios.defaults.headers.common["Authorization"] = `Bearer ${payload.token}`;
 
@@ -83,21 +84,41 @@ const Cart = () => {
     console.log(isCheckCart);
   }, [isCheckCart]);
 
-  const checkedCart = (row) => {
-    console.log(row);
+  const checkedCart = (row, isChecked) => {
     const checkIsExist = isCheckCart.find((value) => value.id_cart === row.id);
-    if (checkIsExist) {
-      const newData = isCheckCart.filter((value) => value.id_cart !== row.id);
-      setIsCheckCart(newData);
+    if (isChecked) {
+      if (!checkIsExist) {
+        const data = {
+          id_cart: row.id,
+          id_schedule: row.id_schedule,
+          id_course: row.id_course,
+          price: row.price,
+        };
+        setIsCheckCart([...isCheckCart, data]);
+      }
     } else {
-      const data = {
-        id_cart: row.id,
-        id_schedule: row.id_schedule,
-        id_course: row.id_course,
-        price: row.price,
-      };
-      setIsCheckCart([...isCheckCart, data]);
+      if (checkIsExist) {
+        const newData = isCheckCart.filter((value) => value.id_cart !== row.id);
+        setIsCheckCart(newData);
+      }
     }
+  };
+
+  const handleSelectAll = () => {
+    const updatedIsCheckCart = [];
+    if (!selectAll) {
+      // Select all items
+      course.forEach((item) => {
+        updatedIsCheckCart.push({
+          id_cart: item.id,
+          id_schedule: item.id_schedule,
+          id_course: item.id_course,
+          price: item.price,
+        });
+      });
+    }
+    setIsCheckCart(updatedIsCheckCart);
+    setSelectAll(!selectAll);
   };
 
   useEffect(() => {
@@ -122,7 +143,11 @@ const Cart = () => {
             <TableHead>
               <TableRow>
                 <TableCell>
-                  <Checkbox color="primary" />
+                  <Checkbox
+                    color="primary"
+                    checked={selectAll}
+                    onChange={handleSelectAll}
+                  />
                   Pilih Semua
                 </TableCell>
               </TableRow>
@@ -139,13 +164,16 @@ const Cart = () => {
                     }}
                   >
                     <Checkbox
+                      checked={isCheckCart.some(
+                        (value) => value.id_cart === item.id
+                      )}
                       onChange={(e) => checkedCart(item)}
                       color="primary"
                     />
                     <Card sx={{ display: "flex", minWidth: 275 }}>
                       <CardMedia sx={{ flex: "0 0 100px" }}>
                         <img
-                          src={process.env.REACT_APP_IMG_URL +`${item.img}`}
+                          src={process.env.REACT_APP_IMG_URL + `${item.img}`}
                           alt="Header"
                           style={{ maxWidth: "100%", height: "auto" }}
                         />
