@@ -84,40 +84,37 @@ const Cart = () => {
     console.log(isCheckCart);
   }, [isCheckCart]);
 
-  const checkedCart = (row, isChecked) => {
+  const checkedCart = (row) => {
+    console.log(row);
     const checkIsExist = isCheckCart.find((value) => value.id_cart === row.id);
-    if (isChecked) {
-      if (!checkIsExist) {
-        const data = {
-          id_cart: row.id,
-          id_schedule: row.id_schedule,
-          id_course: row.id_course,
-          price: row.price,
-        };
-        setIsCheckCart([...isCheckCart, data]);
-      }
+    if (checkIsExist) {
+      const newData = isCheckCart.filter((value) => value.id_cart !== row.id);
+      setIsCheckCart(newData);
     } else {
-      if (checkIsExist) {
-        const newData = isCheckCart.filter((value) => value.id_cart !== row.id);
-        setIsCheckCart(newData);
-      }
+      const data = {
+        id_cart: row.id,
+        id_schedule: row.id_schedule,
+        id_course: row.id_course,
+        price: row.price,
+      };
+      setIsCheckCart([...isCheckCart, data]);
     }
   };
 
   const handleSelectAll = () => {
-    const updatedIsCheckCart = [];
     if (!selectAll) {
       // Select all items
-      course.forEach((item) => {
-        updatedIsCheckCart.push({
-          id_cart: item.id,
-          id_schedule: item.id_schedule,
-          id_course: item.id_course,
-          price: item.price,
-        });
-      });
+      const allCartItems = course.map((item) => ({
+        id_cart: item.id,
+        id_schedule: item.id_schedule,
+        id_course: item.id_course,
+        price: item.price,
+      }));
+      setIsCheckCart(allCartItems);
+    } else {
+      // Deselect all items
+      setIsCheckCart([]);
     }
-    setIsCheckCart(updatedIsCheckCart);
     setSelectAll(!selectAll);
   };
 
@@ -164,9 +161,11 @@ const Cart = () => {
                     }}
                   >
                     <Checkbox
-                      checked={isCheckCart.some(
-                        (value) => value.id_cart === item.id
-                      )}
+                      checked={
+                        isCheckCart.find((value) => value.id_cart === item.id)
+                          ? true
+                          : false
+                      }
                       onChange={(e) => checkedCart(item)}
                       color="primary"
                     />
