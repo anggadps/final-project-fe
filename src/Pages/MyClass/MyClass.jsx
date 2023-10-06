@@ -56,7 +56,7 @@ const MyClass = () => {
   }, []);
 
   return (
-    <div>
+    <div style={{ minHeight: "100vh" }}>
       {myClass.map((list) => (
         <Stack
           sx={{ borderBottom: 3, borderColor: "grey.300", mx: 10, py: 5 }}

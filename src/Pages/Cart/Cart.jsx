@@ -116,7 +116,7 @@ const Cart = () => {
 
   return (
     <>
-      <div>
+      <div style={{ minHeight: "100vh" }}>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }}>
             <TableHead>
