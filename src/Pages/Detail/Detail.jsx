@@ -72,7 +72,6 @@ const Detail = () => {
         console.log(response.data);
         setSnackbarMessage("Successfully put into cart.");
         setIsSnackbarOpen(true);
-        navigate("/cart");
       })
       .catch((error) => console.log(error));
   };
