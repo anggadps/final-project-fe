@@ -57,30 +57,36 @@ const MyClass = () => {
 
   return (
     <div style={{ minHeight: "100vh" }}>
-      {myClass.map((list) => (
-        <Stack
-          sx={{ borderBottom: 3, borderColor: "grey.300", mx: 10, py: 5 }}
-          direction="row"
-        >
-          <Box
-            component="img"
-            sx={{ height: "140px" }}
-            src={process.env.REACT_APP_IMG_URL + `${list.img}`}
-          />
-          <Box sx={{ px: 3 }}>
-            <Typography sx={{ pb: 1 }}>{list.category_name}</Typography>
-            <Typography variant="h5" sx={{ fontWeight: "bold", pb: 1 }}>
-              {list.course_name}
-            </Typography>
-            <Typography
-              variant="h6"
-              sx={{ color: "#FABC1D", pb: 1, fontWeight: "bold" }}
-            >
-              {formatDate(list.schedule_date)}
-            </Typography>
-          </Box>
-        </Stack>
-      ))}
+      {myClass.length === 0 ? (
+        <div style={{textAlign: "center", padding: "20px"}}>
+          <Typography variant="h5">No Classes Found.</Typography>
+        </div>
+      ) : (
+        myClass.map((list) => (
+          <Stack
+            sx={{ borderBottom: 3, borderColor: "grey.300", mx: 10, py: 5 }}
+            direction="row"
+          >
+            <Box
+              component="img"
+              sx={{ height: "140px" }}
+              src={process.env.REACT_APP_IMG_URL + `${list.img}`}
+            />
+            <Box sx={{ px: 3 }}>
+              <Typography sx={{ pb: 1 }}>{list.category_name}</Typography>
+              <Typography variant="h5" sx={{ fontWeight: "bold", pb: 1 }}>
+                {list.course_name}
+              </Typography>
+              <Typography
+                variant="h6"
+                sx={{ color: "#FABC1D", pb: 1, fontWeight: "bold" }}
+              >
+                {formatDate(list.schedule_date)}
+              </Typography>
+            </Box>
+          </Stack>
+        ))
+      )}
     </div>
   );
 };

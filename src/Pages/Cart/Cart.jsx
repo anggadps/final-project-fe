@@ -150,68 +150,74 @@ const Cart = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {course.map((item) => (
-                <TableRow key={item.id}>
-                  <TableCell
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "1rem",
-                      padding: "2rem",
-                    }}
-                  >
-                    <Checkbox
-                      checked={
-                        isCheckCart.find((value) => value.id_cart === item.id)
-                          ? true
-                          : false
-                      }
-                      onChange={(e) => checkedCart(item)}
-                      color="primary"
-                    />
-                    <Card sx={{ display: "flex", minWidth: 275 }}>
-                      <CardMedia sx={{ flex: "0 0 100px" }}>
-                        <img
-                          src={process.env.REACT_APP_IMG_URL + `${item.img}`}
-                          alt="Header"
-                          style={{ maxWidth: "100%", height: "auto" }}
-                        />
-                      </CardMedia>
-                      <CardContent>
-                        <Typography
-                          sx={{ fontSize: 14 }}
-                          color="text.secondary"
-                          gutterBottom
-                        >
-                          {item.category_name}
-                        </Typography>
-                        <Typography variant="h5" component="div">
-                          {item.course_name}
-                        </Typography>
-                        <Typography
-                          variant="h5"
-                          color="primary"
-                          component="div"
-                        >
-                          Rp.{item.price}
-                        </Typography>
-                        <Typography
-                          sx={{ fontSize: 14 }}
-                          color="text.secondary"
-                        >
-                          {formatDate(item.schedule_date)}
-                        </Typography>
-                      </CardContent>
-                    </Card>
-                  </TableCell>
-                  <TableCell>
-                    <DeleteForeverIcon
-                      style={{ cursor: "pointer", color: "red", fontSize: 40 }}
-                      onClick={() => deleteCart(item.id)}
-                    />
-                  </TableCell>
+              {course.length === 0 ? (
+                <TableRow>
+                  <TableCell colSpan={2} align="center">There no courses in the cart.</TableCell>
                 </TableRow>
-              ))}
+              ) : (
+                course.map((item) => (
+                  <TableRow key={item.id}>
+                    <TableCell
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "1rem",
+                        padding: "2rem",
+                      }}
+                    >
+                      <Checkbox
+                        checked={
+                          isCheckCart.find((value) => value.id_cart === item.id)
+                            ? true
+                            : false
+                        }
+                        onChange={(e) => checkedCart(item)}
+                        color="primary"
+                      />
+                      <Card sx={{ display: "flex", minWidth: 275 }}>
+                        <CardMedia sx={{ flex: "0 0 100px" }}>
+                          <img
+                            src={process.env.REACT_APP_IMG_URL + `${item.img}`}
+                            alt="Header"
+                            style={{ maxWidth: "100%", height: "auto" }}
+                          />
+                        </CardMedia>
+                        <CardContent>
+                          <Typography
+                            sx={{ fontSize: 14 }}
+                            color="text.secondary"
+                            gutterBottom
+                          >
+                            {item.category_name}
+                          </Typography>
+                          <Typography variant="h5" component="div">
+                            {item.course_name}
+                          </Typography>
+                          <Typography
+                            variant="h5"
+                            color="primary"
+                            component="div"
+                          >
+                            Rp.{item.price}
+                          </Typography>
+                          <Typography
+                            sx={{ fontSize: 14 }}
+                            color="text.secondary"
+                          >
+                            {formatDate(item.schedule_date)}
+                          </Typography>
+                        </CardContent>
+                      </Card>
+                    </TableCell>
+                    <TableCell>
+                      <DeleteForeverIcon
+                        style={{ cursor: "pointer", color: "red", fontSize: 40 }}
+                        onClick={() => deleteCart(item.id)}
+                      />
+                    </TableCell>
+                  </TableRow>
+                ))
+              )}
               <TableRow>
                 <TableCell
                   style={{
