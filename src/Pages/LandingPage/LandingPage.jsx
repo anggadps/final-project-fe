@@ -63,10 +63,10 @@ function LandingPage() {
             {menuItems.map((item) => (
               <Grid item xs={12} sm={6} md={4} key={item.id}>
                 <Card
-                  category={item.category}
+                  category={item.category_name}
                   name={item.name}
                   price={item.price}
-                  image={item.image}
+                  image={item.img}
                   id={item.id}
                 />
               </Grid>
@@ -99,7 +99,7 @@ function LandingPage() {
               <Grid item xs={6} sm={4} md={3} key={item.id}>
                 <CategoryCard
                   name={item.name}
-                  image={item.image}
+                  image={item.img}
                   id={item.id}
                 />
               </Grid>

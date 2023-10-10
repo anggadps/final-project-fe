@@ -4,7 +4,6 @@ import "./menuclass.css";
 import { Grid } from "@mui/material";
 import Card from "../../components/MenuCard";
 import axios from "axios";
-import asian from "./images/asian.png";
 
 const MenuClass = () => {
   const { id } = useParams();
@@ -31,7 +30,7 @@ const MenuClass = () => {
     <div>
       <section className="menu-class">
         <div className="header-bg">
-          <img src={asian} alt="Header" />
+          <img src={process.env.REACT_APP_IMG_URL + `${data.img}`} alt="Header" />
         </div>
       </section>
       <section className="description">
@@ -51,7 +50,7 @@ const MenuClass = () => {
                   category={item.typeCar}
                   name={item.name}
                   price={item.price}
-                  image={item.image}
+                  image={item.img}
                   id={item.id}
                 />
               </Grid>

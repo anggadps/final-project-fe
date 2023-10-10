@@ -5,6 +5,21 @@ nav {
   padding: 1rem 2.5rem;
 }
 
+.logo-button {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.logo-button a {
+  text-decoration: none;
+  color: black;
+}
+
+.menu-button {
+  margin-left: 2rem; /* Adjust the margin as needed */
+}
+
 .button-container {
   display: flex;
   align-items: center;
@@ -30,5 +45,42 @@ nav {
 
   .button-container button {
     margin: 0.5rem 0;
+  }
+}
+
+/* Add this CSS in your component.css file */
+
+/* Drawer */
+.drawer-content {
+  width: 250px;
+}
+
+.drawer-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.drawer-content li {
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+/* Button to open Drawer (Hamburger menu) */
+.menu-icon {
+  display: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  /* Show the menu icon button for screens with a max-width of 768px */
+  .menu-icon {
+    display: block;
+  }
+
+  /* Hide the desktop button container for small screens */
+  .button-container {
+    display: none;
   }
 }
