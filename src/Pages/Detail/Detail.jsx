@@ -21,7 +21,7 @@ const Detail = () => {
   const [dataCategory, setDataCategory] = useState([]);
   const [dataSchedule, setDataSchedule] = useState([]);
   const [selectedScheduleId, setSelectedScheduleId] = useState(null);
-  const { payload } = useAuth();
+  const { payload, isLoggedIn } = useAuth();
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
 
@@ -214,11 +214,6 @@ const Detail = () => {
           </FormControl>
 
           <Box>
-            {isPayloadTokenEmpty ? (
-              <Typography variant="subtitle1" color="error">
-                For order this course, you must login first.
-              </Typography>
-            ) : (
               <>
                 <Button
                   variant="outlined"
@@ -248,7 +243,6 @@ const Detail = () => {
                   </Alert>
                 </Snackbar>
               </>
-            )}
           </Box>
         </Box>
 
