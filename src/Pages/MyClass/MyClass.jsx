@@ -65,7 +65,7 @@ const MyClass = () => {
           <Box
             component="img"
             sx={{ height: "140px" }}
-            src={`https://placeimg.com/640/480/any`}
+            src={`http://via.placeholder.com/600`}
           />
           <Box sx={{ px: 3 }}>
             <Typography sx={{ pb: 1 }}>Empty Class</Typography>
