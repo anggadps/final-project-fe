@@ -72,7 +72,12 @@ export default function BasicModal(props) {
 
   return (
     <div>
-      <Button onClick={handleOpen} variant="contained" sx={{ width: 175 }}>
+      <Button
+        disabled={props.isCheckCart.length === 0}
+        onClick={handleOpen}
+        variant="contained"
+        sx={{ width: 175 }}
+      >
         Pay Now
       </Button>
       <Modal

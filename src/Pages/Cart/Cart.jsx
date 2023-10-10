@@ -152,7 +152,9 @@ const Cart = () => {
             <TableBody>
               {course.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={2} align="center">There no courses in the cart.</TableCell>
+                  <TableCell colSpan={2} align="center">
+                    There no courses in the cart.
+                  </TableCell>
                 </TableRow>
               ) : (
                 course.map((item) => (
@@ -211,7 +213,11 @@ const Cart = () => {
                     </TableCell>
                     <TableCell>
                       <DeleteForeverIcon
-                        style={{ cursor: "pointer", color: "red", fontSize: 40 }}
+                        style={{
+                          cursor: "pointer",
+                          color: "red",
+                          fontSize: 40,
+                        }}
                         onClick={() => deleteCart(item.id)}
                       />
                     </TableCell>
