@@ -26,6 +26,7 @@ import InvoiceAdmin from "./admin/Invoice/Invoice";
 import DetailInvoiceAdmin from "./admin/DetailInvoice/DetailInvoice";
 import UserAdmin from "./admin/User/User";
 import LoginAdmin from "./admin/LoginAdmin/LoginAdmin";
+import Success from "./Pages/Success/Success";
 
 
 
@@ -71,6 +72,7 @@ function App() {
             <Route path="/detail-invoice/:id" element={<DetailInvoice />} />
             <Route path="/success-purchase" element={<SuccessPurchase />} />
             <Route path="/success-register" element={<SuccessRegister />} />
+            <Route path="/success" element={<Success />} />
           </Routes>
           {!isAdminRoute && <Footer />}
         

@@ -81,7 +81,7 @@ function Register() {
           console.log("Success Register", successModalOpen)
         })
         .catch((error) => console.log(error));
-      navigate("/login");
+      navigate("/success");
     }
   };
 
